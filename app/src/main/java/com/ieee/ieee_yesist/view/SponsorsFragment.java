@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,12 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.adapters.SponsorAdapter;
 import com.ieee.ieee_yesist.api.Service;
@@ -30,6 +38,8 @@ public class SponsorsFragment extends Fragment {
 
     private static List<Sponsor> sponsorList = new ArrayList<>();
     private FragmentSponsorsBinding binding;
+    private FirebaseFirestore db;
+    private SponsorAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,13 +52,14 @@ public class SponsorsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        db = FirebaseFirestore.getInstance();
         populate();
-        SponsorAdapter adapter = new SponsorAdapter(sponsorList);
+        adapter = new SponsorAdapter(sponsorList);
         binding.sponsorsRv.setAdapter(adapter);
-        binding.backButton.setOnClickListener( v -> {
+        binding.backButton.setOnClickListener(v -> {
             Navigation.findNavController(requireActivity(), R.id.fragNavHost).popBackStack();
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView);
-            if(bottomNavigationView.getVisibility() == View.GONE)
+            if (bottomNavigationView.getVisibility() == View.GONE)
                 bottomNavigationView.setVisibility(View.VISIBLE);
         });
 
@@ -83,18 +94,21 @@ public class SponsorsFragment extends Fragment {
 //    }
 
     private void populate() {
-        Service.api.getSponsors().enqueue(new Callback<SponsorList>() {
-            @Override
-            public void onResponse(Call<SponsorList> call, Response<SponsorList> response) {
-                SponsorList responseList = response.body();
-                assert responseList != null;
-                sponsorList.addAll(responseList.getSponsorList());
+        db.collection("sponsors").addSnapshotListener((value, error) -> {
+            if (error != null) {
+                Log.w("SPONSOR", "Listen failed.", error);
+                return;
             }
-
-            @Override
-            public void onFailure(Call<SponsorList> call, Throwable t) {
-                Toast.makeText(requireContext(), "Connection Failed! Please Try Later", Toast.LENGTH_LONG).show();
+            if(!value.isEmpty())
+                sponsorList.clear();
+            for (QueryDocumentSnapshot doc : value) {
+                if (doc != null) {
+                    Sponsor sponsor = new Sponsor(doc.getId(), doc.getString("Image"), doc.getString("URL"));
+                    sponsorList.add(sponsor);
+                }
             }
+            adapter = new SponsorAdapter(sponsorList);
+            binding.sponsorsRv.setAdapter(adapter);
         });
     }
 }

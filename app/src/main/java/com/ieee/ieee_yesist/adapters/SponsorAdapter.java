@@ -20,6 +20,10 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.ViewHold
     private Context context;
     private final List<Sponsor> sponsorList;
 
+    public void setSponsorList(List<Sponsor> sponsorList) {
+        sponsorList = sponsorList;
+    }
+
     public SponsorAdapter(List<Sponsor> sponsorList) {
         this.sponsorList = sponsorList;
     }
@@ -44,7 +48,6 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.ViewHold
              .placeholder(cpd)
              .into(holder.sponsorImg);
 
-        holder.sponsorImg.setImageBitmap(null);
         holder.sponsorImg.setOnClickListener(v -> {
             context.startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse(sponsorList.get(position).getWebUrl())));
