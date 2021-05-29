@@ -1,12 +1,30 @@
 package com.ieee.ieee_yesist.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Sponsor {
 
-    private String imgUrl, webUrl;
+    @SerializedName("sponsor_id")
+    private int id;
 
-    public Sponsor(String imgUrl, String webUrl) {
+    @SerializedName("sponsor_image")
+    private String imgUrl;
+
+    @SerializedName("sponsor_url")
+    private String webUrl;
+
+    public Sponsor(int id, String imgUrl, String webUrl) {
+        this.id = id;
         this.imgUrl = imgUrl;
         this.webUrl = webUrl;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getImgUrl() {
