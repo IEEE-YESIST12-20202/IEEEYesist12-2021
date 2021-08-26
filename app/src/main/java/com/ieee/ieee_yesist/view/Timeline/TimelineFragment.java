@@ -9,19 +9,27 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.adapters.SpeakerAdapter;
 import com.ieee.ieee_yesist.adapters.TimelineAdapter;
+import com.ieee.ieee_yesist.api.Service;
 import com.ieee.ieee_yesist.databinding.FragmentTimelineBinding;
 import com.ieee.ieee_yesist.model.Event;
 import com.ieee.ieee_yesist.model.Speaker;
+import com.ieee.ieee_yesist.model.WebinarItem;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
@@ -35,6 +43,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TimelineFragment extends Fragment implements TimelineAdapter.EventClickListener {
 
@@ -60,6 +72,7 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
 
         try {
             populateList();
+            populateListThroughAPI();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -267,6 +280,66 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
 
         eventList.add(new Event(getString(R.string.eventtit5), getString(R.string.eventdes_5),
                 getString(R.string.eventurl_4),"https://docs.google.com/forms/d/e/1FAIpQLSclXKyGGev0-3xEZ3uP-N2-yaBuVzbtHnGiJVpLdX6qWd9AJg/viewform?usp=send_form", date, endDate, speakers5));
+
+    }
+
+
+    private void populateListThroughAPI() throws ParseException {
+
+        Call<JsonArray> webinarData = Service.api.getWebinarDetails();
+        webinarData.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                if(response.code() == 200) {
+                    JsonArray webinars = response.body();
+                    assert webinars != null;
+                    for(JsonElement weibnar: webinars) {
+                        Gson gson = new Gson();
+                        WebinarItem webinarItem = gson.fromJson(weibnar, WebinarItem.class);
+
+                        String inputStringStart = webinarItem.getWebinarStartTime();
+                        String inputStringEnd = webinarItem.getWebinarEndTime();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+                        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
+                        Date sparsed = null, eparsed = null;
+                        try {
+                            sparsed = simpleDateFormat.parse(inputStringStart);
+                            eparsed = simpleDateFormat.parse(inputStringEnd);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+                        sdf.setTimeZone(cal.getTimeZone());
+                        String startDate = sdf.format(sparsed);
+                        String finishDate = sdf.format(eparsed);
+                        Date date = null, endDate = null;
+                        try {
+                            date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
+                            endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        String eventTitle = webinarItem.getWebinarTitle();
+                        String eventDesc = webinarItem.getWebinarDesc();
+                        String eventUrl = webinarItem.getWebinarLink();
+                        String speakerName = webinarItem.getWebinarSpeaker();
+                        String speakerDesc = webinarItem.getWebinarSpeakerDes();
+                        List<Speaker> speakers = new ArrayList<>();
+                        speakers.add(new Speaker(speakerName, speakerDesc, R.drawable.ic_male));
+                        eventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate, speakers));
+                    }
+
+                }else {
+                    Log.d("Webinar Data", "Response Code != 200");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+                Log.e("Webinar Data", "onFailure", t);
+            }
+        });
 
     }
 
