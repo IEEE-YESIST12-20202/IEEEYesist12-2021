@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawer;
     private boolean firstTimeOpen;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        firstTimeOpen = true;
+    }
+
     private void checkConnection(Context context) {
         ConnectionUtil connectionUtil = new ConnectionUtil(context);
         connectionUtil.observe(this, isNetworkAvailable -> {
@@ -49,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 firstTimeOpen = false;
             }else {
-                Snackbar snackbar = Snackbar.make(binding.snackContainer.parentLayout, "OOPS! You are OFFLINE",
+                Snackbar snackbar = Snackbar.make(binding.snackContainer.parentLayout, "Please connect to the Internet!",
                         Snackbar.LENGTH_INDEFINITE);
                 snackbar.setBackgroundTint(getResources().getColor(R.color.red));
                 snackbar.setAnchorView(binding.snackContainer.bottomNavigationView);
@@ -66,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        firstTimeOpen = true;
         //Checking Network Connectivity during Runtime
         checkConnection(this);
 
@@ -78,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.tracksFragment, R.id.aboutTeamFragment, R.id.trendingFragment,
                 R.id.trackDetailsFragment, R.id.professionalInfoFragment, R.id.sterringCommitteeFragment, R.id.subCommitteeFragment,
-                R.id.sponsorsFragment, R.id.faqFragment, R.id.aboutUsFragment)
+                R.id.sponsorsFragment, R.id.faqFragment, R.id.faqDetailFragment, R.id.aboutUsFragment)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -99,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "IEEE Yesist12");
-                String shareMessage= "Hey checkout this amazing app over here : https://play.google.com/store/apps/details?id=com.ieee.ieee_yesist&hl=en";
+                String shareMessage= "Checkout IEEE YESIST12 2021 app over here: https://play.google.com/store/apps/details?id=com.ieee.ieee_yesist&hl=en";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 startActivity(Intent.createChooser(shareIntent, "Share Via"));
             }

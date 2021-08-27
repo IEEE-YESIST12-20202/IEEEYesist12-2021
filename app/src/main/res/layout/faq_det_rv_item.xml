@@ -3,20 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
-    android:layout_marginBottom="4dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/rules_cardview"
+        android:id="@+id/faq_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="true">
+        app:cardBackgroundColor="@color/white">
 
         <LinearLayout
+            android:id="@+id/faq_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -24,23 +20,27 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/track_item_bg"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:paddingBottom="5dp">
+                android:paddingBottom="5dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
 
                 <TextView
-                    android:id="@+id/rules_track"
+                    android:id="@+id/faq_ques"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/nunitoregular"
                     android:includeFontPadding="false"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="Rules for the track"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:maxWidth="300dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="30dp"
+                    android:paddingBottom="15dp"
+                    android:text="What is your name? "
+                    android:textColor="#0091EA"
+                    android:textSize="20sp"
+                    app:autoSizeMaxTextSize="20sp"
+                    app:autoSizeTextType="uniform"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -50,30 +50,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic__arrow_down"
-                    android:tint="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@id/rules_track"
+                    android:tint="#33676969"
+                    app:layout_constraintBottom_toBottomOf="@id/faq_ques"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/rules_track" />
+                    app:layout_constraintTop_toTopOf="@id/faq_ques" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginEnd="34dp"
+                android:background="#33676969">
+
+            </View>
+
             <TextView
-                android:id="@+id/rules_track_det"
+                android:id="@+id/faq_track_det"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginEnd="34dp"
+                android:autoLink="web|email"
                 android:fontFamily="@font/nunitoregular"
+                android:justificationMode="inter_word"
                 android:lineSpacingExtra="3dp"
-                android:paddingStart="10dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
                 android:paddingBottom="4dp"
                 android:text="@string/random_text"
-                android:textColor="#676969"
-                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:visibility="gone" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

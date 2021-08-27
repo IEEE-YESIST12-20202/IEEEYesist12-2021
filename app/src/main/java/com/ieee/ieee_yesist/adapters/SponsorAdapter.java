@@ -20,6 +20,10 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.ViewHold
     private Context context;
     private final List<Sponsor> sponsorList;
 
+    public void setSponsorList(List<Sponsor> sponsorList) {
+        sponsorList = sponsorList;
+    }
+
     public SponsorAdapter(List<Sponsor> sponsorList) {
         this.sponsorList = sponsorList;
     }
