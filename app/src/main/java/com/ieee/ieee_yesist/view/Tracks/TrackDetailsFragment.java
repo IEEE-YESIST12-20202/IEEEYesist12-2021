@@ -5,6 +5,7 @@ import android.graphics.text.LineBreaker;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.gson.JsonObject;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.adapters.TrackDetailsAdapter;
 import com.ieee.ieee_yesist.adapters.YesistHomeAdapter;
@@ -31,8 +41,14 @@ import com.ieee.ieee_yesist.databinding.ContentScrollingBinding;
 import com.ieee.ieee_yesist.databinding.FragmentTrackDetailsBinding;
 import com.ieee.ieee_yesist.model.YesistHome;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TrackDetailsFragment extends Fragment {
 
@@ -100,8 +116,12 @@ public class TrackDetailsFragment extends Fragment {
         imgTrack.setImageResource(imgUrl);
 
 
+
         if(track.equals("Innovation Challenge")){
-            trackInfo.setText(R.string.innovation);
+
+            callApi(track);
+
+//            trackInfo.setText(R.string.innovation);
             callPilot("https://ieeeyesist12.org/ic-pilot-registration/");
 
             //datesList.clear();
@@ -119,8 +139,10 @@ public class TrackDetailsFragment extends Fragment {
             setTracksRulesRecycler(rulesList);
         }
         else if(track.equals("Maker Fair")){
+
+            callApi("MakerFair");
             btnRegister.setVisibility(View.VISIBLE);
-            trackInfo.setText(R.string.maker_fair);
+//            trackInfo.setText(R.string.maker_fair);
             //datesList.clear();
             datesList = new ArrayList<>();
             datesList.add(new YesistHome(R.string.imp_dates,R.string.maker_dates_pilot));
@@ -135,7 +157,9 @@ public class TrackDetailsFragment extends Fragment {
             setTracksRulesRecycler(rulesList);
             }
         else if(track.equals("Junior Einstein")){
-            trackInfo.setText(R.string.einstein);
+
+            callApi(track);
+//            trackInfo.setText(R.string.einstein);
             btnRegister.setVisibility(View.VISIBLE);
             callPilot("https://ieeeyesist12.org/je-pilot-registration/");
 
@@ -153,8 +177,10 @@ public class TrackDetailsFragment extends Fragment {
             setTracksRulesRecycler(rulesList);
         }
         else if(track.equals("WePOWER")){
+
+            callApi("WePower");
             btnRegister.setVisibility(View.VISIBLE);
-            trackInfo.setText(R.string.wepower);
+//            trackInfo.setText(R.string.wepower);
             //cardviewExpand(R.string.wepower_abstract,R.string.wepower_rules);
             //datesList.clear();
             datesList = new ArrayList<>();
@@ -170,9 +196,11 @@ public class TrackDetailsFragment extends Fragment {
             setTracksRulesRecycler(rulesList);
         }
         else if(track.equals("Special Track")){
+
+            callApi(track);
             btnRegister.setVisibility(View.VISIBLE);
             //expandable card view
-            trackInfo.setText(R.string.special);
+//            trackInfo.setText(R.string.special);
             //cardviewExpand(R.string.special_abstract,R.string.special_rules);
             //datesList.clear();
             datesList = new ArrayList<>();
@@ -205,6 +233,40 @@ public class TrackDetailsFragment extends Fragment {
             startActivity(intent);
         });
         return binding.getRoot();
+    }
+
+    private void callApi(String track) {
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        JsonArrayRequest request = new JsonArrayRequest("https://ieeeyesist12.org/phpApp/track.php",
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray jsonArray) {
+                        Log.d("Response", String.valueOf(jsonArray));
+                        for(int i = 0; i < jsonArray.length(); i++) {
+                            try {
+                                JSONObject trackObj = jsonArray.getJSONObject(i);
+                                String trackName = trackObj.getString("track_name");
+                                if (trackName.equals(track)) {
+                                    String desc = trackObj.getString("track_description");
+                                    trackInfo.setText(desc);
+                                }
+                            }
+                            catch(JSONException e) {
+//                                Log.e("Error: " + e.toString());
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.d("Error", "ER");
+                    }
+                });
+
+        queue.add(request);
+
     }
 
     private void callPilot(String pilotUrl) {

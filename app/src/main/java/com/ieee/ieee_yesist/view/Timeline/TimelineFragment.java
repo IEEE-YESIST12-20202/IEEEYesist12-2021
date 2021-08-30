@@ -18,10 +18,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.adapters.SpeakerAdapter;
 import com.ieee.ieee_yesist.adapters.TimelineAdapter;
@@ -33,6 +38,10 @@ import com.ieee.ieee_yesist.model.WebinarItem;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -283,65 +292,120 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
 
     }
 
+//
+//    private void populateListThroughAPI() throws ParseException {
+//
+//        Call<JSONArray> webinarData = Service.api.getWebinarDetails();
+//        webinarData.enqueue(new Callback<JSONArray>() {
+//            @Override
+//            public void onResponse(Call<JSONArray> call, Response<JSONArray> response) {
+//                try {
+//                    Log.d("TRY GHSUH RHA H", "fuck off");
+//                    Log.d("RESPONSE", String.valueOf(response.body()));
+//                    JSONArray webinars = response.body();
+//                    for (int i = 0; i < webinars.length(); i++) {
+//                        JSONObject jsonObject = webinars.getJSONObject(i);
+////                        String inputStringStart = webinarItem.getWebinarStartTime();
+////                        String inputStringEnd = webinarItem.getWebinarEndTime();
+////                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+////                        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
+////                        Date sparsed = null, eparsed = null;
+////                        try {
+////                            sparsed = simpleDateFormat.parse(inputStringStart);
+////                            eparsed = simpleDateFormat.parse(inputStringEnd);
+////                        } catch (ParseException e) {
+////                            e.printStackTrace();
+////                        }
+////                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+////                        sdf.setTimeZone(cal.getTimeZone());
+////                        String startDate = sdf.format(sparsed);
+////                        String finishDate = sdf.format(eparsed);
+////                        Date date = null, endDate = null;
+////                        try {
+////                            date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
+////                            endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
+////                        } catch (ParseException e) {
+////                            e.printStackTrace();
+////                        }
+////
+////                        String eventTitle = webinarItem.getWebinarTitle();
+////                        String eventDesc = webinarItem.getWebinarDesc();
+////                        String eventUrl = webinarItem.getWebinarLink();
+////                        String speakerName = webinarItem.getWebinarSpeaker();
+////                        String speakerDesc = webinarItem.getWebinarSpeakerDes();
+////                        List<Speaker> speakers = new ArrayList<>();
+////                        speakers.add(new Speaker(speakerName, speakerDesc, R.drawable.ic_male));
+////                        eventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate, speakers));
+//                    }
+//
+//                }catch (Exception e){
+//                    Log.d("Webinar Data", e.toString());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JSONArray> call, Throwable t) {
+//                Log.d("Webinar Data", "onFailure", t);
+//            }
+//        });
+//
+//    }
+
 
     private void populateListThroughAPI() throws ParseException {
 
-        Call<JsonArray> webinarData = Service.api.getWebinarDetails();
-        webinarData.enqueue(new Callback<JsonArray>() {
-            @Override
-            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                if(response.code() == 200) {
-                    JsonArray webinars = response.body();
-                    assert webinars != null;
-                    for(JsonElement weibnar: webinars) {
-                        Gson gson = new Gson();
-                        WebinarItem webinarItem = gson.fromJson(weibnar, WebinarItem.class);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String webinarAPI = "https://ieeeyesist12.org/phpApp/webinar.php";
 
-                        String inputStringStart = webinarItem.getWebinarStartTime();
-                        String inputStringEnd = webinarItem.getWebinarEndTime();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-                        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
-                        Date sparsed = null, eparsed = null;
+        JsonArrayRequest request = new JsonArrayRequest(webinarAPI,
+                jsonArray -> {
+                    Log.d("Response", String.valueOf(jsonArray));
+                    for(int i = 0; i < jsonArray.length(); i++) {
                         try {
-                            sparsed = simpleDateFormat.parse(inputStringStart);
-                            eparsed = simpleDateFormat.parse(inputStringEnd);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-                        sdf.setTimeZone(cal.getTimeZone());
-                        String startDate = sdf.format(sparsed);
-                        String finishDate = sdf.format(eparsed);
-                        Date date = null, endDate = null;
-                        try {
-                            date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
-                            endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                            JSONObject webinarItem = jsonArray.getJSONObject(i);
+                            String inputStringStart = webinarItem.getString("webinar_start_time");
+                            String inputStringEnd = webinarItem.getString("webinar_end_time");
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+                            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
+                            Date sparsed = null, eparsed = null;
+                            try {
+                                sparsed = simpleDateFormat.parse(inputStringStart);
+                                eparsed = simpleDateFormat.parse(inputStringEnd);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+                            sdf.setTimeZone(cal.getTimeZone());
+                            String startDate = sdf.format(sparsed);
+                            String finishDate = sdf.format(eparsed);
+                            Date date = null, endDate = null;
+                            try {
+                                date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
+                                endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
 
-                        String eventTitle = webinarItem.getWebinarTitle();
-                        String eventDesc = webinarItem.getWebinarDesc();
-                        String eventUrl = webinarItem.getWebinarLink();
-                        String speakerName = webinarItem.getWebinarSpeaker();
-                        String speakerDesc = webinarItem.getWebinarSpeakerDes();
-                        List<Speaker> speakers = new ArrayList<>();
-                        speakers.add(new Speaker(speakerName, speakerDesc, R.drawable.ic_male));
-                        eventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate, speakers));
+                            String eventTitle = webinarItem.getString("webinar_title");
+                            String eventDesc = webinarItem.getString("webinar_desc");
+                            String eventUrl = webinarItem.getString("webinar_link");
+                            String speakerName = webinarItem.getString("webinar_speaker");
+                            String speakerDesc = webinarItem.getString("webinar_speaker_iurl");
+                            List<Speaker> speakers = new ArrayList<>();
+                            speakers.add(new Speaker(speakerName, speakerDesc, R.drawable.ic_male));
+                            eventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate, speakers));
+                        } catch(JSONException e) {
+                                Log.e("Error", e.toString());
+                        }
                     }
+                },
+                volleyError -> Log.e("Error", volleyError.toString()));
 
-                }else {
-                    Log.d("Webinar Data", "Response Code != 200");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonArray> call, Throwable t) {
-                Log.e("Webinar Data", "onFailure", t);
-            }
-        });
+        queue.add(request);
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
