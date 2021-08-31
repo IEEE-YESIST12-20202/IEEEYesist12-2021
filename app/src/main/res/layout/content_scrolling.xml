@@ -77,13 +77,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tracks_key_dates_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            tools:listitem="@layout/track_details_rv_item">
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tracks_key_dates_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                tools:listitem="@layout/track_details_rv_item"></androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>
 <!--
         <LinearLayout
@@ -151,7 +150,6 @@
             android:includeFontPadding="true"
             android:lineSpacingExtra="5dp"
             android:paddingBottom="6dp"
-            android:text="@string/wepower"
             android:textColor="#676969"
             android:textSize="16sp"
             android:textStyle="normal" />

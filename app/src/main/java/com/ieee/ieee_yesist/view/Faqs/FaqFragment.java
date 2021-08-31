@@ -50,11 +50,11 @@ public class FaqFragment extends Fragment implements FaqAdapter.OnFaqListener {
 
         trackRecycler=view.findViewById(R.id.tracks_faq_rv);
         trackList = new ArrayList<>();
-        trackList.add(new TrackList("Innovation Challenge",R.drawable.innovation));
-        trackList.add(new TrackList("Maker Fair",R.drawable.maker_fair));
-        trackList.add(new TrackList("Junior Einstein",R.drawable.jr_einstein));
-        trackList.add(new TrackList("WePOWER",R.drawable.wepower));
-        trackList.add(new TrackList("Special Track",R.drawable.special_track_new_bg));
+        trackList.add(new TrackList("Innovation Challenge",R.drawable.innovation,"",""));
+        trackList.add(new TrackList("Maker Fair",R.drawable.maker_fair,"",""));
+        trackList.add(new TrackList("Junior Einstein",R.drawable.jr_einstein,"",""));
+        trackList.add(new TrackList("WePOWER",R.drawable.wepower,"",""));
+        trackList.add(new TrackList("Special Track",R.drawable.special_track_new_bg,"",""));
 
         setTrackRecycler(trackList);
 

@@ -2,9 +2,9 @@ package com.ieee.ieee_yesist.model;
 
 public class YesistHome {
     Integer quesName;
-    Integer quesReason;
+    String quesReason;
 
-    public YesistHome(Integer quesName, Integer quesReason) {
+    public YesistHome(Integer quesName, String quesReason) {
         this.quesName = quesName;
         this.quesReason = quesReason;
     }
@@ -17,11 +17,11 @@ public class YesistHome {
         this.quesName = quesName;
     }
 
-    public Integer getQuesReason() {
+    public String getQuesReason() {
         return quesReason;
     }
 
-    public void setQuesReason(Integer quesReason) {
+    public void setQuesReason(String quesReason) {
         this.quesReason = quesReason;
     }
 }

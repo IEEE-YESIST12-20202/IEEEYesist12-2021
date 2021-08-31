@@ -46,50 +46,50 @@ public class FaqsDetailFragment extends Fragment {
 
         if(trackName.equals("Innovation Challenge")){
             faqList = new ArrayList<>();
-            faqList.add(new YesistHome(R.string.innov_ques1,R.string.innov_ans1));
-            faqList.add(new YesistHome(R.string.innov_ques2,R.string.innov_ans2));
-            faqList.add(new YesistHome(R.string.innov_ques3,R.string.innov_ans3));
-            faqList.add(new YesistHome(R.string.innov_ques4,R.string.innov_ans4));
+            faqList.add(new YesistHome(R.string.innov_ques1,getString(R.string.innov_ans1)));
+            faqList.add(new YesistHome(R.string.innov_ques2,getString(R.string.innov_ans2)));
+            faqList.add(new YesistHome(R.string.innov_ques3,getString(R.string.innov_ans3)));
+            faqList.add(new YesistHome(R.string.innov_ques4,getString(R.string.innov_ans4)));
 
             setFaqRecycler(faqList);
         }
         else if(trackName.equals("Maker Fair")){
             faqList = new ArrayList<>();
-            faqList.add(new YesistHome(R.string.maker_ques1,R.string.maker_ans1));
-            faqList.add(new YesistHome(R.string.maker_ques2,R.string.maker_ans2));
+            faqList.add(new YesistHome(R.string.maker_ques1,getString(R.string.maker_ans1)));
+            faqList.add(new YesistHome(R.string.maker_ques2,getString(R.string.maker_ans2)));
 
             setFaqRecycler(faqList);
 
         }
         else if(trackName.equals("Junior Einstein")){
             faqList = new ArrayList<>();
-            faqList.add(new YesistHome(R.string.je_ques1,R.string.je_ans1));
-            faqList.add(new YesistHome(R.string.je_ques2,R.string.je_ans2));
-            faqList.add(new YesistHome(R.string.je_ques3,R.string.je_ans3));
-            faqList.add(new YesistHome(R.string.je_ques4,R.string.je_ans4));
-            faqList.add(new YesistHome(R.string.je_ques5,R.string.je_ans5));
-            faqList.add(new YesistHome(R.string.je_ques6,R.string.je_ans6));
+            faqList.add(new YesistHome(R.string.je_ques1,getString(R.string.je_ans1)));
+            faqList.add(new YesistHome(R.string.je_ques2,getString(R.string.je_ans2)));
+            faqList.add(new YesistHome(R.string.je_ques3,getString(R.string.je_ans3)));
+            faqList.add(new YesistHome(R.string.je_ques4,getString(R.string.je_ans4)));
+            faqList.add(new YesistHome(R.string.je_ques5,getString(R.string.je_ans5)));
+            faqList.add(new YesistHome(R.string.je_ques6,getString(R.string.je_ans6)));
 
             setFaqRecycler(faqList);
 
         }
         else if(trackName.equals("WePOWER")){
             faqList = new ArrayList<>();
-            faqList.add(new YesistHome(R.string.wepower_ques1,R.string.wepower_ans1));
-            faqList.add(new YesistHome(R.string.wepower_ques2,R.string.wepower_ans2));
-            faqList.add(new YesistHome(R.string.wepower_ques3,R.string.wepower_ans3));
+            faqList.add(new YesistHome(R.string.wepower_ques1,getString(R.string.wepower_ans1)));
+            faqList.add(new YesistHome(R.string.wepower_ques2,getString(R.string.wepower_ans2)));
+            faqList.add(new YesistHome(R.string.wepower_ques3,getString(R.string.wepower_ans3)));
 
             setFaqRecycler(faqList);
 
         }
         else if(trackName.equals("Special Track")){
             faqList = new ArrayList<>();
-            faqList.add(new YesistHome(R.string.st_ques1,R.string.st_ans1));
-            faqList.add(new YesistHome(R.string.st_ques2,R.string.st_ans2));
-            faqList.add(new YesistHome(R.string.st_ques3,R.string.st_ans3));
-            faqList.add(new YesistHome(R.string.st_ques4,R.string.st_ans4));
-            faqList.add(new YesistHome(R.string.st_ques5,R.string.st_ans5));
-            faqList.add(new YesistHome(R.string.st_ques6,R.string.st_ans6));
+            faqList.add(new YesistHome(R.string.st_ques1,getString(R.string.st_ans1)));
+            faqList.add(new YesistHome(R.string.st_ques2,getString(R.string.st_ans2)));
+            faqList.add(new YesistHome(R.string.st_ques3,getString(R.string.st_ans3)));
+            faqList.add(new YesistHome(R.string.st_ques4,getString(R.string.st_ans4)));
+            faqList.add(new YesistHome(R.string.st_ques5,getString(R.string.st_ans5)));
+            faqList.add(new YesistHome(R.string.st_ques6,getString(R.string.st_ans6)));
 
             setFaqRecycler(faqList);
 

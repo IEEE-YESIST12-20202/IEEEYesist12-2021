@@ -38,6 +38,10 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.Trac
     public void onBindViewHolder(@NonNull TrackListViewHolder holder, int position) {
         holder.trackImage.setImageResource(trackList.get(position).getImageUrl());
         holder.trackName.setText(trackList.get(position).getTrackName());
+        holder.firstPrize.setText("1st Prize - "+trackList.get(position).getFirstPrize());
+        holder.secondPrize.setText("2nd Prize - "+trackList.get(position).getSecondPrize());
+        holder.firstPrize.setVisibility(View.VISIBLE);
+        holder.secondPrize.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -48,13 +52,15 @@ public class TrackListAdapter extends RecyclerView.Adapter<TrackListAdapter.Trac
     public static final class TrackListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView trackImage;
-        TextView trackName;
+        TextView trackName, firstPrize, secondPrize;
         OnTrackListener onTrackListener;
 
         public TrackListViewHolder(@NonNull View itemView, OnTrackListener onTrackListener) {
             super(itemView);
             trackImage = itemView.findViewById(R.id.imageTrack);
             trackName = itemView.findViewById(R.id.trackName);
+            firstPrize = itemView.findViewById(R.id.txtPrize1);
+            secondPrize = itemView.findViewById(R.id.txtPrize2);
             this.onTrackListener = onTrackListener;
             itemView.setOnClickListener(this);
         }
