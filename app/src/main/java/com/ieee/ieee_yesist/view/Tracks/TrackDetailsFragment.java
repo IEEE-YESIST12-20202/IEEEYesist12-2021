@@ -232,6 +232,10 @@ public class TrackDetailsFragment extends Fragment {
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
         });
+
+        btnPilotRegister.setVisibility(View.GONE);
+        btnRegister.setVisibility(View.GONE);
+
         return binding.getRoot();
     }
 
