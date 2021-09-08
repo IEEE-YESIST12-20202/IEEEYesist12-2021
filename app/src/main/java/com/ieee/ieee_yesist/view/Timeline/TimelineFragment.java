@@ -15,25 +15,30 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+//import com.android.volley.RequestQueue;
+//import com.android.volley.VolleyError;
+//import com.android.volley.toolbox.JsonArrayRequest;
+//import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.adapters.SpeakerAdapter;
+import com.ieee.ieee_yesist.adapters.SponsorAdapter;
 import com.ieee.ieee_yesist.adapters.TimelineAdapter;
 import com.ieee.ieee_yesist.api.Service;
 import com.ieee.ieee_yesist.databinding.FragmentTimelineBinding;
 import com.ieee.ieee_yesist.model.Event;
 import com.ieee.ieee_yesist.model.Speaker;
+import com.ieee.ieee_yesist.model.Sponsor;
 import com.ieee.ieee_yesist.model.WebinarItem;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -65,26 +70,21 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
 
     private FragmentTimelineBinding binding;
     private List<Event> eventList;
+    private List<Event> dynamicEventList;
     private List<Event> displayList;
     private TimelineAdapter timelineAdapter;
     private Calendar cal;
+    private FirebaseFirestore db;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        eventList = new ArrayList<>();
-        displayList = new ArrayList<>();
+
+        db = FirebaseFirestore.getInstance();
 
         cal = Calendar.getInstance();
         String timezone = cal.getTimeZone().getDisplayName();
         binding.timezone.setText(timezone);
-
-        try {
-            populateList();
-            populateListThroughAPI();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         String displayMonth = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + cal.get(Calendar.YEAR);
         binding.tvMonth.setText(displayMonth);
@@ -100,13 +100,25 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
         });
 
         timelineAdapter = new TimelineAdapter(this);
-        binding.timelineRv.setAdapter(timelineAdapter);
-        setUpCalendar();
-        populateDisplayList(null, false);
+        displayList = new ArrayList<>();
+        eventList = new ArrayList<>();
+        dynamicEventList = new ArrayList<>();
+
+        binding.progressBar.setVisibility(View.GONE);
+
+        try {
+            populateList();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        populateListThroughFirebase();
+        Log.d("EVENT LIST SIZE", Integer.toString(eventList.size()));
+
     }
 
     private void populateDisplayList(CalendarDay date, boolean dateSelected) {
-        displayList.clear();
+        displayList = new ArrayList<>();
         if(dateSelected) {
             CalendarDay selectedDay = binding.calendar.getSelectedDate();
             assert selectedDay != null;
@@ -114,24 +126,38 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
             if(sday.length() == 1) {
                 sday = "0" + sday;
             }
+            String smonth = String.valueOf(selectedDay.getMonth());
+            if(smonth.length() == 1) {
+                smonth = "0" + smonth;
+            }
+            String syear = String.valueOf(selectedDay.getYear());
+            String selectedDate = syear + "-" + smonth + "-" + sday;
+            Log.d("SELECTED DATE", selectedDate);
             for (int i = 0; i < eventList.size(); i++) {
                 Event event = eventList.get(i);
                 Date d = event.getDate();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String day = sdf.format(d);
-                if (sday.equalsIgnoreCase(day)) {
+                Log.d("DAY", day);
+                if (selectedDate.equalsIgnoreCase(day)) {
                     displayList.add(event);
                 }
             }
         }else {
             if (date != null) {
-                String m = new DateFormatSymbols().getMonths()[date.getMonth() - 1];
+                String smonth = String.valueOf(date.getMonth());
+                if(smonth.length() == 1) {
+                    smonth = "0" + smonth;
+                }
+                String syear = String.valueOf(date.getYear());
+                String selectedDate = syear + "-" + smonth;
+                Log.d("SELECTED DATE", selectedDate);
                 for (int i = 0; i < eventList.size(); i++) {
                     Event event = eventList.get(i);
                     Date d = event.getDate();
-                    SimpleDateFormat sdf = new SimpleDateFormat("MMMM");
-                    String month = sdf.format(d);
-                    if (m.equalsIgnoreCase(month)) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+                    String day = sdf.format(d);
+                    if (selectedDate.equalsIgnoreCase(day)) {
                         displayList.add(event);
                     }
                 }
@@ -183,6 +209,8 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
         int cDay = cal.get(Calendar.DATE);
         int cMonth = cal.get(Calendar.MONTH);
         int cYear = cal.get(Calendar.YEAR);
+        Log.d("CALENDAR DAY", CalendarDay.from(cYear, cMonth+1, cDay).toString());
+        populateDisplayList(CalendarDay.from(cYear, cMonth+1, cDay), false);
         ArrayList<CalendarDay> currentList = new ArrayList<>();
         ArrayList<CalendarDay> upcomingList = new ArrayList<>();
         ArrayList<CalendarDay> completedList = new ArrayList<>();
@@ -292,6 +320,62 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
 
     }
 
+
+    private void populateListThroughFirebase() {
+        db.collection("timeline").addSnapshotListener((value, error) -> {
+            if (error != null) {
+                Log.w("TIMELINE FIREBASE", "Listen failed.", error);
+                return;
+            }
+            if (!value.isEmpty()) {
+                dynamicEventList.clear();
+                binding.progressBar.setVisibility(View.VISIBLE);
+            }
+            for (QueryDocumentSnapshot doc : value) {
+                if (doc != null) {
+                    String inputStringStart = doc.getString("start_time");
+                    String inputStringEnd = doc.getString("end_time");
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+                    simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
+                    Date sparsed = null, eparsed = null;
+                    try {
+                        sparsed = simpleDateFormat.parse(inputStringStart);
+                        eparsed = simpleDateFormat.parse(inputStringEnd);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+                    sdf.setTimeZone(cal.getTimeZone());
+                    String startDate = sdf.format(sparsed);
+                    String finishDate = sdf.format(eparsed);
+                    Date date = null, endDate = null;
+                    try {
+                        date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
+                        endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    String eventTitle = doc.getString("title");
+                    String eventDesc = doc.getString("description");
+                    String eventUrl = "";
+                    List<String> speakerNames = (List<String>)doc.get("speaker");
+                    String speakerDesc = "";
+                    List<Speaker> speakers = new ArrayList<>();
+                    for(String speakerName: speakerNames)
+                        speakers.add(new Speaker(speakerName, speakerDesc, R.drawable.ic_male));
+                    dynamicEventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate, speakers));
+                }
+            }
+            eventList.addAll(dynamicEventList);
+            binding.timelineRv.setAdapter(timelineAdapter);
+            setUpCalendar();
+            populateDisplayList(null, false);
+            binding.progressBar.setVisibility(View.GONE);
+        });
+    }
+
+
 //
 //    private void populateListThroughAPI() throws ParseException {
 //
@@ -351,59 +435,59 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
 //
 //    }
 
-
-    private void populateListThroughAPI() throws ParseException {
-
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String webinarAPI = "https://ieeeyesist12.org/phpApp/webinar.php";
-
-        JsonArrayRequest request = new JsonArrayRequest(webinarAPI,
-                jsonArray -> {
-                    Log.d("Response", String.valueOf(jsonArray));
-                    for(int i = 0; i < jsonArray.length(); i++) {
-                        try {
-                            JSONObject webinarItem = jsonArray.getJSONObject(i);
-                            String inputStringStart = webinarItem.getString("webinar_start_time");
-                            String inputStringEnd = webinarItem.getString("webinar_end_time");
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-                            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
-                            Date sparsed = null, eparsed = null;
-                            try {
-                                sparsed = simpleDateFormat.parse(inputStringStart);
-                                eparsed = simpleDateFormat.parse(inputStringEnd);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
-                            sdf.setTimeZone(cal.getTimeZone());
-                            String startDate = sdf.format(sparsed);
-                            String finishDate = sdf.format(eparsed);
-                            Date date = null, endDate = null;
-                            try {
-                                date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
-                                endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-
-                            String eventTitle = webinarItem.getString("webinar_title");
-                            String eventDesc = webinarItem.getString("webinar_desc");
-                            String eventUrl = webinarItem.getString("webinar_link");
-                            String speakerName = webinarItem.getString("webinar_speaker");
-                            String speakerDesc = webinarItem.getString("webinar_speaker_iurl");
-                            List<Speaker> speakers = new ArrayList<>();
-                            speakers.add(new Speaker(speakerName, speakerDesc, R.drawable.ic_male));
-                            eventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate, speakers));
-                        } catch(JSONException e) {
-                                Log.e("Error", e.toString());
-                        }
-                    }
-                },
-                volleyError -> Log.e("Error", volleyError.toString()));
-
-        queue.add(request);
-
-    }
+//
+//    private void populateListThroughAPI() throws ParseException {
+//
+//        RequestQueue queue = Volley.newRequestQueue(getActivity());
+//        String webinarAPI = "https://ieeeyesist12.org/phpApp/webinar.php";
+//
+//        JsonArrayRequest request = new JsonArrayRequest(webinarAPI,
+//                jsonArray -> {
+//                    Log.d("Response", String.valueOf(jsonArray));
+//                    for(int i = 0; i < jsonArray.length(); i++) {
+//                        try {
+//                            JSONObject webinarItem = jsonArray.getJSONObject(i);
+//                            String inputStringStart = webinarItem.getString("webinar_start_time");
+//                            String inputStringEnd = webinarItem.getString("webinar_end_time");
+//                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+//                            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+5:30"));
+//                            Date sparsed = null, eparsed = null;
+//                            try {
+//                                sparsed = simpleDateFormat.parse(inputStringStart);
+//                                eparsed = simpleDateFormat.parse(inputStringEnd);
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+//                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+//                            sdf.setTimeZone(cal.getTimeZone());
+//                            String startDate = sdf.format(sparsed);
+//                            String finishDate = sdf.format(eparsed);
+//                            Date date = null, endDate = null;
+//                            try {
+//                                date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
+//                                endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
+//                            } catch (ParseException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            String eventTitle = webinarItem.getString("webinar_title");
+//                            String eventDesc = webinarItem.getString("webinar_desc");
+//                            String eventUrl = webinarItem.getString("webinar_link");
+//                            String speakerName = webinarItem.getString("webinar_speaker");
+//                            String speakerDesc = webinarItem.getString("webinar_speaker_iurl");
+//                            List<Speaker> speakers = new ArrayList<>();
+//                            speakers.add(new Speaker(speakerName, speakerDesc, R.drawable.ic_male));
+//                            eventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate, speakers));
+//                        } catch(JSONException e) {
+//                                Log.e("Error", e.toString());
+//                        }
+//                    }
+//                },
+//                volleyError -> Log.e("Error", volleyError.toString()));
+//
+//        queue.add(request);
+//
+//    }
 
 
 
