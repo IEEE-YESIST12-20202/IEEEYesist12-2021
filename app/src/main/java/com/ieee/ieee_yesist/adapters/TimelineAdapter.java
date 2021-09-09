@@ -83,10 +83,19 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             holder.day.setTextColor(Color.parseColor("#676969"));
         }
 
+        boolean showJoin = true;
+
+        if(eventList.get(position).getEventUrl().equals(""))
+            showJoin = false;
+
         if(eventList.get(position).getEndDate().before(d)) {
             holder.startTime.setTextColor(Color.parseColor("#01579B"));
             holder.status.setBackgroundResource(R.drawable.ic_completed_tv);
             holder.status.setText("Completed");
+            if(showJoin)
+                holder.join.setVisibility(View.VISIBLE);
+            else
+                holder.join.setVisibility(View.GONE);
             holder.join.setText("Watch");
             holder.join.setBackgroundColor(Color.parseColor("#01579B"));
             holder.join.setOnClickListener( v ->
@@ -94,6 +103,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             );
         }else if(d.before(eventList.get(position).getDate())) {
             holder.startTime.setTextColor(Color.parseColor("#0091EA"));
+            holder.join.setVisibility(View.GONE);
             holder.join.setText("Register");
             holder.join.setBackgroundColor(Color.parseColor("#01579B"));
             holder.join.setOnClickListener( v ->
@@ -106,7 +116,11 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             }
         }else {
             holder.startTime.setTextColor(Color.parseColor("#EA0000"));
-            holder.join.setText("Join");
+            holder.join.setVisibility(View.VISIBLE);
+            if(showJoin)
+                holder.join.setText("Join");
+            else
+                holder.join.setVisibility(View.GONE);
             holder.join.setBackgroundColor(Color.parseColor("#EA0000"));
             holder.join.setOnClickListener( v ->
                     context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(eventList.get(position).getEventUrl())))
