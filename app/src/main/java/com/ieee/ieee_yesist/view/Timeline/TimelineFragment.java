@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -341,6 +342,7 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
                 }
             }
             eventList.addAll(dynamicEventList);
+            Collections.sort(eventList, (o1, o2) -> o1.getDate().compareTo(o2.getDate()));
             binding.timelineRv.setAdapter(timelineAdapter);
             setUpCalendar();
             populateDisplayList(null, false);
