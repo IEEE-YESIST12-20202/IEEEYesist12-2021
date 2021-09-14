@@ -227,10 +227,8 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
         String finishDate = sdf.format(eparsed);
         Date date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
         Date endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
-        List<Speaker> speakers = new ArrayList<>();
-        speakers.add(new Speaker(getString(R.string.speaker1),getString(R.string.sq1), R.drawable.isha_dash));
         eventList.add(new Event(getString(R.string.eventtit1), getString(R.string.eventdes_1),
-                getString(R.string.eventurl_1),null, date, endDate, speakers));
+                getString(R.string.eventurl_1),null, date, endDate));
 
         inputStringStart = "02-04-2021 05:30 PM";
         inputStringEnd = "02-04-2021 06:30 PM";
@@ -240,10 +238,8 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
         finishDate = sdf.format(eparsed);
         date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
         endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
-        List<Speaker> speakers2 = new ArrayList<>();
-        speakers2.add(new Speaker(getString(R.string.speaker2), getString(R.string.sq2), R.drawable.jairo_h_garcia));
         eventList.add(new Event(getString(R.string.eventtit2), getString(R.string.eventdes_2),
-                getString(R.string.eventurl_2), null, date, endDate, speakers2));
+                getString(R.string.eventurl_2), null, date, endDate));
 
         inputStringStart = "14-04-2021 06:30 PM";
         inputStringEnd = "14-04-2021 07:30 PM";
@@ -253,11 +249,8 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
         finishDate = sdf.format(eparsed);
         date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
         endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
-        List<Speaker> speakers3 = new ArrayList<>();
-        speakers3.add(new Speaker(getString(R.string.speaker3), getString(R.string.sq3), R.drawable.uti_anselm));
-
         eventList.add(new Event(getString(R.string.eventtit3), getString(R.string.eventdes_3),
-                 getString(R.string.eventurl_3), null, date, endDate, speakers3));
+                 getString(R.string.eventurl_3), null, date, endDate));
 
         inputStringStart = "23-04-2021 06:30 PM";
         inputStringEnd = "23-04-2021 07:30 PM";
@@ -267,11 +260,8 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
         finishDate = sdf.format(eparsed);
         date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
         endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
-        List<Speaker> speakers4 = new ArrayList<>();
-        speakers4.add(new Speaker(getString(R.string.speaker4), getString(R.string.sq4),  R.drawable.md_koushik_ahamed));
-
         eventList.add(new Event(getString(R.string.eventtit4), getString(R.string.eventdes_4),
-                getString(R.string.eventurl_4),null, date, endDate, speakers4));
+                getString(R.string.eventurl_4),null, date, endDate));
 
 
         inputStringStart = "21-05-2021 06:30 PM";
@@ -282,12 +272,8 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
         finishDate = sdf.format(eparsed);
         date = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(startDate);
         endDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a").parse(finishDate);
-        List<Speaker> speakers5 = new ArrayList<>();
-        speakers5.add(new Speaker(getString(R.string.speaker5_1), getString(R.string.sq5_2),  R.drawable.ic_male));
-        speakers5.add(new Speaker(getString(R.string.speaker5_2), getString(R.string.sq5_2),  R.drawable.ic_female));
-
         eventList.add(new Event(getString(R.string.eventtit5), getString(R.string.eventdes_5),
-                getString(R.string.eventurl_4),"https://docs.google.com/forms/d/e/1FAIpQLSclXKyGGev0-3xEZ3uP-N2-yaBuVzbtHnGiJVpLdX6qWd9AJg/viewform?usp=send_form", date, endDate, speakers5));
+                getString(R.string.eventurl_4),"https://docs.google.com/forms/d/e/1FAIpQLSclXKyGGev0-3xEZ3uP-N2-yaBuVzbtHnGiJVpLdX6qWd9AJg/viewform?usp=send_form", date, endDate));
 
     }
 
@@ -333,12 +319,8 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
                     String eventTitle = doc.getString("title");
                     String eventDesc = doc.getString("description");
                     String eventUrl = doc.getString("event_url");
-                    List<String> speakerNames = (List<String>)doc.get("speaker");
                     String speakerDesc = "";
-                    List<Speaker> speakers = new ArrayList<>();
-                    for(String speakerName: speakerNames)
-                        speakers.add(new Speaker(speakerName, speakerDesc, R.drawable.ic_male));
-                    dynamicEventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate, speakers));
+                    dynamicEventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate));
                 }
             }
             eventList.addAll(dynamicEventList);
@@ -365,15 +347,12 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
                 .inflate(R.layout.bottom_sheet, bottomSheetDialog.findViewById(R.id.constraint_layout));
 
         TextView eventName = bottomSheetView.findViewById(R.id.event_name);
-        RecyclerView speakerRv = bottomSheetView.findViewById(R.id.speaker_rv);
         TextView about = bottomSheetView.findViewById(R.id.about_content);
         TextView eventDate = bottomSheetView.findViewById(R.id.event_date);
         TextView eventTime = bottomSheetView.findViewById(R.id.event_time);
 
         eventName.setText(event.getEventName());
         about.setText(event.getAboutEvent());
-        SpeakerAdapter speakerAdapter = new SpeakerAdapter(event.getSpeakers());
-        speakerRv.setAdapter(speakerAdapter);
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
         String date = sdf.format(event.getDate());

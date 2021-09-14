@@ -6,16 +6,14 @@ import java.util.List;
 public class Event {
     private String eventName, aboutEvent, eventUrl, registerUrl;
     private Date date, endDate;
-    private List<Speaker> speakers;
 
-    public Event(String eventName, String aboutEvent, String eventUrl, String registerUrl, Date date, Date endDate, List<Speaker> speakers) {
+    public Event(String eventName, String aboutEvent, String eventUrl, String registerUrl, Date date, Date endDate) {
         this.eventName = eventName;
         this.aboutEvent = aboutEvent;
         this.eventUrl = eventUrl;
         this.registerUrl = registerUrl;
         this.date = date;
         this.endDate = endDate;
-        this.speakers = speakers;
     }
 
     public String getEventName() {
@@ -64,13 +62,5 @@ public class Event {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public List<Speaker> getSpeakers() {
-        return speakers;
-    }
-
-    public void setSpeakers(List<Speaker> speakers) {
-        this.speakers = speakers;
     }
 }
