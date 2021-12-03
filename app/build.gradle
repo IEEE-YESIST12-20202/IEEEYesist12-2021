@@ -10,8 +10,8 @@ android {
         applicationId "com.ieee.ieee_yesist"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 10
-        versionName "1.9"
+        versionCode 12
+        versionName "2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
