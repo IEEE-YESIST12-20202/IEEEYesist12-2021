@@ -21,11 +21,11 @@
             android:title="@string/tracks"
             android:enabled="true"
             android:icon="@drawable/ic_tracks" />
-        <item
-            android:id="@+id/aboutTeamFragment"
-            android:title="@string/about_team"
-            android:enabled="true"
-            android:icon="@drawable/ic_aboutteam" />
+<!--        <item-->
+<!--            android:id="@+id/aboutTeamFragment"-->
+<!--            android:title="@string/about_team"-->
+<!--            android:enabled="true"-->
+<!--            android:icon="@drawable/ic_aboutteam" />-->
         <item
             android:id="@+id/sponsorsFragment"
             android:title="Sponsors"
