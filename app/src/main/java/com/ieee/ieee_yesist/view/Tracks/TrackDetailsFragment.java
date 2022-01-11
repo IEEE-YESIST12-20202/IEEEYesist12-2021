@@ -215,6 +215,27 @@ public class TrackDetailsFragment extends Fragment {
 //            rulesList.add(new YesistHome(R.string.abs_sel_proc,R.string.special_abstract));
 //            setTracksRulesRecycler(rulesList);
             }
+        else if(track.equals("IEngage Track")){
+
+            callApi(track);
+            btnRegister.setVisibility(View.VISIBLE);
+
+            //expandable card view
+//            trackInfo.setText(R.string.special);
+            //cardviewExpand(R.string.special_abstract,R.string.special_rules);
+            //datesList.clear();
+//            datesList = new ArrayList<>();
+//            datesList.add(new YesistHome(R.string.imp_dates,R.string.special_dates_pilot));
+//            datesList.add(new YesistHome(R.string.reg_fee,R.string.special_reg_fee));
+//            datesList.add(new YesistHome(R.string.awards,R.string.special_awards));
+//            setTracksKeyRecycler(datesList);
+//
+//            //rulesList.clear();
+//            rulesList = new ArrayList<>();
+//            rulesList.add(new YesistHome(R.string.rules_tracks,R.string.special_rules));
+//            rulesList.add(new YesistHome(R.string.abs_sel_proc,R.string.special_abstract));
+//            setTracksRulesRecycler(rulesList);
+        }
 
         /*imgBack.setOnClickListener(v -> {
             Fragment trackinfo = new TracksFragment();
@@ -242,7 +263,7 @@ public class TrackDetailsFragment extends Fragment {
     private void callApi(String track) {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest request = new JsonArrayRequest("https://ieeeyesist12.org/phpApp/track.php",
+        JsonArrayRequest request = new JsonArrayRequest("https://firebasestorage.googleapis.com/v0/b/yesist12.appspot.com/o/track.json?alt=media&token=551f873e-a88b-4fbe-a165-c356fd5f82ff",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {

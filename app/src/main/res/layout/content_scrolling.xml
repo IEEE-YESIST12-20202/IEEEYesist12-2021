@@ -27,10 +27,10 @@
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/registerbutton"
                 android:fontFamily="@font/nunitoregular"
                 android:gravity="center"
-                android:layout_marginTop="15dp"
                 android:includeFontPadding="false"
                 android:paddingStart="50dp"
                 android:paddingTop="8dp"
@@ -40,7 +40,7 @@
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/btnPilotRegister"
@@ -60,7 +60,7 @@
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
 
         <TextView
