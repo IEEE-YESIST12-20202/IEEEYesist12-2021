@@ -9,7 +9,7 @@ public class Event {
 
     public Event(String eventName, String aboutEvent, String eventUrl, String registerUrl, Date date, Date endDate) {
         this.eventName = eventName;
-        this.aboutEvent = aboutEvent;
+        this.aboutEvent = aboutEvent.replace("\\n", "\n");
         this.eventUrl = eventUrl;
         this.registerUrl = registerUrl;
         this.date = date;
