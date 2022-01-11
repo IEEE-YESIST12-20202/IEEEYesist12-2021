@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "IEEE Yesist12");
-                String shareMessage= "Checkout IEEE YESIST12 2021 app over here: https://play.google.com/store/apps/details?id=com.ieee.ieee_yesist&hl=en";
+                String shareMessage= "Checkout IEEE YESIST12 2022 app over here: https://play.google.com/store/apps/details?id=com.ieee.ieee_yesist&hl=en";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 startActivity(Intent.createChooser(shareIntent, "Share Via"));
             }

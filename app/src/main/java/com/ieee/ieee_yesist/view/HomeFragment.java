@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ieee.ieee_yesist.R;
+import com.ieee.ieee_yesist.RegisterActivity;
 import com.ieee.ieee_yesist.adapters.YesistHomeAdapter;
 import com.ieee.ieee_yesist.model.YesistHome;
 
@@ -26,6 +28,7 @@ public class HomeFragment extends Fragment {
     RecyclerView yesistRecyler;
     YesistHomeAdapter yesistHomeAdapter;
     List<YesistHome> yesistHomeList;
+    Button registerButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +47,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        registerButton = view.findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registerIntent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(registerIntent);
+            }
+        });
 
         yesistHomeList = new ArrayList<>();
         yesistHomeList.add(new YesistHome(R.string.knowledge_title,getString(R.string.knowledge)));
