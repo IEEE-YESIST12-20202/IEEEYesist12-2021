@@ -21,22 +21,15 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.AutoTransition;
-import androidx.transition.TransitionManager;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.gson.JsonObject;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.adapters.TrackDetailsAdapter;
-import com.ieee.ieee_yesist.adapters.YesistHomeAdapter;
 import com.ieee.ieee_yesist.databinding.ContentScrollingBinding;
 import com.ieee.ieee_yesist.databinding.FragmentTrackDetailsBinding;
 import com.ieee.ieee_yesist.model.YesistHome;
@@ -46,14 +39,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TrackDetailsFragment extends Fragment {
 
     ImageView imgTrack;
-    TextView btnRegister,btnPilotRegister,trackInfo,rules_det,abstract_det;
+    TextView btnRegister,btnPilotRegister,trackInfo,rules_det,abstract_det,eventUpdates, aboutEvent, trackPillars, trackPillarsInfo;
     CardView rules_cv, abstract_cv;
     ImageButton arrow_rules,arrow_abs;
     private FragmentTrackDetailsBinding binding;
@@ -71,6 +62,10 @@ public class TrackDetailsFragment extends Fragment {
         btnPilotRegister=view.btnPilotRegister;
         imgTrack=binding.imageTrack;
         trackInfo=view.trackInfo;
+        eventUpdates = view.eventUpdates;
+        aboutEvent = view.aboutEvent;
+        trackPillars = view.trackPillars;
+        trackPillarsInfo = view.trackPillarsInfo;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             trackInfo.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
         }
@@ -217,7 +212,10 @@ public class TrackDetailsFragment extends Fragment {
             }
         else if(track.equals("IEngage Track")){
 
-            callApi(track);
+            callApi(track, false);
+            eventUpdates.setVisibility(View.GONE);
+            trackPillars.setVisibility(View.VISIBLE);
+            trackPillarsInfo.setVisibility(View.VISIBLE);
             btnRegister.setVisibility(View.VISIBLE);
 
             //expandable card view
@@ -260,10 +258,10 @@ public class TrackDetailsFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void callApi(String track) {
+    private void callApi(String track, boolean registrationFeeRulesAndAbstract) {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest request = new JsonArrayRequest("https://firebasestorage.googleapis.com/v0/b/yesist12.appspot.com/o/track.json?alt=media&token=551f873e-a88b-4fbe-a165-c356fd5f82ff",
+        JsonArrayRequest request = new JsonArrayRequest("https://firebasestorage.googleapis.com/v0/b/yesist12.appspot.com/o/track.json?alt=media&token=05f8d514-e875-4e17-9778-f06374f0639e",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
@@ -275,17 +273,23 @@ public class TrackDetailsFragment extends Fragment {
                                 if (trackName.equals(track)) {
                                     String desc = trackObj.getString("track_description");
                                     trackInfo.setText(desc);
-                                    String trackFees = trackObj.getString("track_fees");
-                                    datesList = new ArrayList<>();
-                                    datesList.add(new YesistHome(R.string.reg_fee,trackFees));
-                                    setTracksKeyRecycler(datesList);
+                                    if (registrationFeeRulesAndAbstract) {
+                                        String trackFees = trackObj.getString("track_fees");
+                                        datesList = new ArrayList<>();
+                                        datesList.add(new YesistHome(R.string.reg_fee, trackFees));
+                                        setTracksKeyRecycler(datesList);
 
-                                    String rules = trackObj.getString("track_rules");
-                                    String trackSp = trackObj.getString("track_sp");
-                                    rulesList = new ArrayList<>();
-                                    rulesList.add(new YesistHome(R.string.rules_tracks,rules));
-                                    rulesList.add(new YesistHome(R.string.abs_sel_proc,trackSp));
-                                    setTracksRulesRecycler(rulesList);
+                                        String rules = trackObj.getString("track_rules");
+                                        String trackSp = trackObj.getString("track_sp");
+                                        rulesList = new ArrayList<>();
+                                        rulesList.add(new YesistHome(R.string.rules_tracks, rules));
+                                        rulesList.add(new YesistHome(R.string.abs_sel_proc, trackSp));
+                                        setTracksRulesRecycler(rulesList);
+                                    }
+                                    else{
+                                        String trackPillars = trackObj.getString("track_pillars");
+                                        trackPillarsInfo.setText(trackPillars);
+                                    }
                                 }
                             }
                             catch(JSONException e) {
@@ -303,6 +307,10 @@ public class TrackDetailsFragment extends Fragment {
 
         queue.add(request);
 
+    }
+
+    private void callApi(String track) {
+        callApi(track, true);
     }
 
     private void callPilot(String pilotUrl) {
