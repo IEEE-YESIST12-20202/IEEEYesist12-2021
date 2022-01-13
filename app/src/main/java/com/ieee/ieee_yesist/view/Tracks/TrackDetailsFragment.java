@@ -261,7 +261,7 @@ public class TrackDetailsFragment extends Fragment {
     private void callApi(String track, boolean registrationFeeRulesAndAbstract) {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest request = new JsonArrayRequest("https://firebasestorage.googleapis.com/v0/b/yesist12.appspot.com/o/track.json?alt=media&token=05f8d514-e875-4e17-9778-f06374f0639e",
+        JsonArrayRequest request = new JsonArrayRequest(getString(R.string.firebase_database_url)+"/tracks.json",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
