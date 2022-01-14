@@ -55,11 +55,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingStart="20dp"
-            android:paddingEnd="20dp"
             android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:orientation="vertical">
+            android:paddingEnd="20dp"
+            android:paddingBottom="65dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -95,8 +95,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunitoregular"
-                android:paddingTop="10dp"
                 android:gravity="start"
+                android:paddingTop="10dp"
                 android:text="• Empower and encourage the engineering minds to work for the social cause through.
                 \n\n• Conducting competitions associated with vision, which involves young engineering graduates, engineering students and school students.
                 \n\n• Acknowledging the service and contribution of engineering instructors to society.

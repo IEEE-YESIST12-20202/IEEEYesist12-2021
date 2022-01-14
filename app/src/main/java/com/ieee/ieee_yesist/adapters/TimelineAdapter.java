@@ -103,7 +103,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             );
         }else if(d.before(eventList.get(position).getDate())) {
             holder.startTime.setTextColor(Color.parseColor("#0091EA"));
-            holder.join.setVisibility(View.GONE);
+            if(!eventList.get(position).getRegisterUrl().equals(""))
+                holder.join.setVisibility(View.VISIBLE);
             holder.join.setText("Register");
             holder.join.setBackgroundColor(Color.parseColor("#01579B"));
             holder.join.setOnClickListener( v ->

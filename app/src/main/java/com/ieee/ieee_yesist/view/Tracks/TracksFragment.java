@@ -88,6 +88,7 @@ public class TracksFragment extends Fragment implements TrackListAdapter.OnTrack
                             trackList.add(new TrackList("Junior Einstein", R.drawable.jr_einstein,first.get(j),second.get(j)));
                             trackList.add(new TrackList("WePOWER", R.drawable.wepower,first.get(j),second.get(j)));
                             trackList.add(new TrackList("Special Track", R.drawable.special_track_new_bg,first.get(j),second.get(j)));
+                            trackList.add(new TrackList("IEngage Track", R.drawable.ie_engage_track,first.get(j),second.get(j)));
 
                             setTrackRecycler(trackList);
                         }
@@ -104,10 +105,11 @@ public class TracksFragment extends Fragment implements TrackListAdapter.OnTrack
     }
 
     private void setTrackRecycler(List<TrackList> trackList) {
+        if(isAdded()){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
         trackRecycler.setLayoutManager(layoutManager);
         trackListAdapter = new TrackListAdapter(requireContext(),trackList,this);
-        trackRecycler.setAdapter(trackListAdapter);
+        trackRecycler.setAdapter(trackListAdapter);}
 
     }
 

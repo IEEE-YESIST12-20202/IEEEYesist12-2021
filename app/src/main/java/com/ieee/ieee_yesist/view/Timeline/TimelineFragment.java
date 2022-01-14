@@ -319,8 +319,12 @@ public class TimelineFragment extends Fragment implements TimelineAdapter.EventC
                     String eventTitle = doc.getString("title");
                     String eventDesc = doc.getString("description");
                     String eventUrl = doc.getString("event_url");
+                    String registerUrl = doc.getString("register_url");
+                    if (registerUrl == null){
+                        registerUrl = "";
+                    }
                     String speakerDesc = "";
-                    dynamicEventList.add(new Event(eventTitle, eventDesc, eventUrl, null, date, endDate));
+                    dynamicEventList.add(new Event(eventTitle, eventDesc, eventUrl, registerUrl, date, endDate));
                 }
             }
             eventList.addAll(dynamicEventList);
