@@ -888,5 +888,6 @@ Stephen Okwiri</string>
     <string name="call_for_pilots_header">Call for Pilots</string>
     <string name="call_for_pilots_description">Pilots are selected all over the world for conducting the prelims of IEEE YESIST12. Click the below link to know more detail</string>
     <string name="register_now_button_text">Register Now</string>
+    <string name="default_notification_channel_id">com.ieee.ieee_yesist.default</string>
 
 </resources>

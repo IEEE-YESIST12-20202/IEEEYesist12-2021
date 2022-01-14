@@ -1,5 +1,6 @@
 package com.ieee.ieee_yesist;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -8,19 +9,27 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.ieee.ieee_yesist.databinding.ActivityMainBinding;
 import com.ieee.ieee_yesist.util.ConnectionUtil;
 import com.ieee.ieee_yesist.view.AboutUsFragment;
@@ -46,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         ConnectionUtil connectionUtil = new ConnectionUtil(context);
         connectionUtil.observe(this, isNetworkAvailable -> {
             if (isNetworkAvailable) {
-                if(!firstTimeOpen) {
+                if (!firstTimeOpen) {
                     Snackbar snackbar = Snackbar.make(binding.snackContainer.parentLayout, "You are ONLINE",
                             Snackbar.LENGTH_LONG);
                     snackbar.setBackgroundTint(getResources().getColor(R.color.green_version));
@@ -54,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     snackbar.show();
                 }
                 firstTimeOpen = false;
-            }else {
+            } else {
                 Snackbar snackbar = Snackbar.make(binding.snackContainer.parentLayout, "Please connect to the Internet!",
                         Snackbar.LENGTH_INDEFINITE);
                 snackbar.setBackgroundTint(getResources().getColor(R.color.red));
@@ -75,6 +84,17 @@ public class MainActivity extends AppCompatActivity {
         //Checking Network Connectivity during Runtime
         checkConnection(this);
 
+        //Create notification channel
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(getString(R.string.default_notification_channel_id),
+                    "Default",
+                    NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
@@ -92,33 +112,33 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.setNavigationItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.sponsorsFragment) {
+            if (item.getItemId() == R.id.sponsorsFragment) {
                 bottomNavigationView.setVisibility(View.GONE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new SponsorsFragment()).commit();
             }
-            if(item.getItemId() == R.id.aboutUsFragment) {
+            if (item.getItemId() == R.id.aboutUsFragment) {
                 bottomNavigationView.setVisibility(View.GONE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new AboutUsFragment()).commit();
             }
-            if(item.getItemId() == R.id.shareApp) {
+            if (item.getItemId() == R.id.shareApp) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "IEEE Yesist12");
-                String shareMessage= "Checkout IEEE YESIST12 2022 app over here: https://play.google.com/store/apps/details?id=com.ieee.ieee_yesist&hl=en";
+                String shareMessage = "Checkout IEEE YESIST12 2022 app over here: https://play.google.com/store/apps/details?id=com.ieee.ieee_yesist&hl=en";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 startActivity(Intent.createChooser(shareIntent, "Share Via"));
             }
-            if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
             return NavigationUI.onNavDestinationSelected(item, navController);
         });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.more_options) {
+            if (item.getItemId() == R.id.more_options) {
                 binding.drawerLayout.openDrawer(GravityCompat.START);
             }
-            if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
             return NavigationUI.onNavDestinationSelected(item, navController);
@@ -137,10 +157,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START);
-        }else {
-            if(bottomNavigationView.getVisibility() == View.GONE)
+        } else {
+            if (bottomNavigationView.getVisibility() == View.GONE)
                 bottomNavigationView.setVisibility(View.VISIBLE);
             super.onBackPressed();
         }
