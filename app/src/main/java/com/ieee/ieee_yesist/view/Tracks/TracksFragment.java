@@ -105,10 +105,11 @@ public class TracksFragment extends Fragment implements TrackListAdapter.OnTrack
     }
 
     private void setTrackRecycler(List<TrackList> trackList) {
+        if(isAdded()){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false);
         trackRecycler.setLayoutManager(layoutManager);
         trackListAdapter = new TrackListAdapter(requireContext(),trackList,this);
-        trackRecycler.setAdapter(trackListAdapter);
+        trackRecycler.setAdapter(trackListAdapter);}
 
     }
 

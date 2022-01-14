@@ -108,7 +108,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="32dp"
+                android:layout_margin="18dp"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="2dp">
 
@@ -123,14 +123,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
-                        android:layout_marginBottom="18dp"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/poppins_extra_bold"
                         android:includeFontPadding="false"
                         android:paddingBottom="1dp"
                         android:text="@string/call_for_pilots_header"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="40sp"
+                        android:textSize="28sp"
                         app:autoSizeMaxTextSize="46sp"
                         app:autoSizeTextType="uniform" />
 
@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/nunito_font"
                         android:maxLines="5"
                         android:text="@string/call_for_pilots_description"
