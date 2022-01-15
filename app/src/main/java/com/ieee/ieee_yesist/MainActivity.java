@@ -85,12 +85,16 @@ public class MainActivity extends AppCompatActivity {
         checkConnection(this);
 
         //Create notification channel
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(getString(R.string.default_notification_channel_id),
                     "Default",
                     NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription("Default Notification Channel");
+            channel.enableLights(true);
+            channel.enableVibration(true);
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
         }
 

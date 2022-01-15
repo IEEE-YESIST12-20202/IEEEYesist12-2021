@@ -1,5 +1,7 @@
  package com.ieee.ieee_yesist;
 
+import static androidx.core.app.NotificationCompat.PRIORITY_HIGH;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -50,6 +52,7 @@ public class YesistFirebaseMessagingService extends FirebaseMessagingService {
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(notificationTitle)
                         .setContentText(messageBody)
+                        .setPriority(PRIORITY_HIGH)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .setContentIntent(pendingIntent);
@@ -57,13 +60,6 @@ public class YesistFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Since android Oreo notification channel is needed.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId,
-                    "Default",
-                    NotificationManager.IMPORTANCE_HIGH);
-            notificationManager.createNotificationChannel(channel);
-        }
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 }
