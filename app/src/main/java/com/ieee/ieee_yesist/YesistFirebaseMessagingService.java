@@ -28,7 +28,6 @@ public class YesistFirebaseMessagingService extends FirebaseMessagingService {
      */
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        Log.d("FCM","message received");
         if (remoteMessage.getNotification() != null) {
 
             sendNotification(
