@@ -101,10 +101,18 @@
         android:id="@+id/placesFragment"
         android:name="com.ieee.ieee_yesist.view.PlacesFragment"
         android:label="fragment_places"
-        tools:layout="@layout/fragment_places" />
+        tools:layout="@layout/fragment_places" >
+        <action
+            android:id="@+id/action_placesFragment_to_onePlaceFragment"
+            app:destination="@id/onePlaceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/onePlaceFragment"
         android:name="com.ieee.ieee_yesist.view.OnePlaceFragment"
         android:label="OnePlaceFragment"
-        tools:layout="@layout/fragment_one_place"/>
+        tools:layout="@layout/fragment_one_place">
+        <action
+            android:id="@+id/action_onePlaceFragment_to_placesFragment"
+            app:destination="@id/placesFragment" />
+    </fragment>
 </navigation>

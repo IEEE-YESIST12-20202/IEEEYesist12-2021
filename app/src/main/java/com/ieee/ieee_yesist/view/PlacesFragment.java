@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -165,12 +166,14 @@ public class PlacesFragment extends Fragment implements OnPlaceClickListener {
 
 
 
-        Fragment fragment = new OnePlaceFragment();
+      /*  Fragment fragment = new OnePlaceFragment();
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragNavHost, fragment);
         fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
+
+        Navigation.findNavController(requireView()).navigate(R.id.action_placesFragment_to_onePlaceFragment,bundle);
     }
 }
