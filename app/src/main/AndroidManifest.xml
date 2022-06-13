@@ -22,7 +22,7 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".SubmitAbstractActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,8 @@ public class OnePlaceFragment extends Fragment {
 
         binding.onePlacename.setText(bundle.getString("name"));
         binding.opname2.setText(bundle.getString("name"));
-        binding.description.setText(bundle.getString("description"));
+        binding.placeDescription.setText(bundle.getString("description"));
+        binding.placeDescription.setMovementMethod(new ScrollingMovementMethod());
         binding.simpleRatingBar.setRating(bundle.getFloat("rating"));
         Glide.with(requireActivity()).load(bundle.getString("image")).into(binding.oneplaceimage);
 

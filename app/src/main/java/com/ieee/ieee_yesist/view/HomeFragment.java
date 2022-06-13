@@ -14,7 +14,7 @@ import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ieee.ieee_yesist.R;
-import com.ieee.ieee_yesist.RegisterActivity;
+import com.ieee.ieee_yesist.SubmitAbstractActivity;
 import com.ieee.ieee_yesist.adapters.YesistHomeAdapter;
 import com.ieee.ieee_yesist.model.YesistHome;
 
@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment {
     RecyclerView yesistRecyler;
     YesistHomeAdapter yesistHomeAdapter;
     List<YesistHome> yesistHomeList;
-    Button registerButton;
+    Button submitButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,12 +47,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        registerButton = view.findViewById(R.id.registerButton);
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        submitButton = view.findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(getActivity(), RegisterActivity.class);
-                startActivity(registerIntent);
+                Intent submitIntent = new Intent(getActivity(), SubmitAbstractActivity.class);
+                startActivity(submitIntent);
             }
         });
 

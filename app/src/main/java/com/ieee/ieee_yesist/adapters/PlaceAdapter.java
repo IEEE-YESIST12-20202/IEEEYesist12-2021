@@ -45,7 +45,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.Viewholder>{
 
     @Override
     public void onBindViewHolder(@NonNull PlaceAdapter.Viewholder holder, int position) {
-        PlaceModel model = placeModelArrayList.get(position);
+        PlaceModel model = placeModelArrayList.get(holder.getAdapterPosition());
         holder.pname.setText(model.getName());
         Glide.with(context)
                 .load(model.getImage1())

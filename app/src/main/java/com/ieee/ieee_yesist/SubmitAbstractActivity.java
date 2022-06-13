@@ -8,19 +8,19 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class RegisterActivity extends AppCompatActivity {
+public class SubmitAbstractActivity extends AppCompatActivity {
     WebView myWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_register);
-        myWebView = new WebView(RegisterActivity.this);
+        myWebView = new WebView(SubmitAbstractActivity.this);
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         myWebView.setWebViewClient(new WebViewClient());
         setContentView(myWebView);
-        myWebView.loadUrl("https://ieeeyesist12.org/pilot-registration/");
+        myWebView.loadUrl("https://ieeeyesist12.org/abstract-submission/");
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

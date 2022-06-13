@@ -885,9 +885,11 @@ Stephen Okwiri</string>
     <string name="st_ans6">For inquiries about contest rules or the entry form, please email ieeeyesist12@gmail.com</string>
 
     <string name="about_yesist12">To unify social responsibility and ethics in young minds through activities and to encourage service-oriented engineering practice, YESIST 12 has started. An international talent show, IEEE YESIST 12 (Youth endeavours for Social Innovation using sustainable technology)(SS12) is a platform for the students and young professionals to showcase their fresh pristine ideas to find the key to humanitarian and social issues affecting directly the community around them.\n\nLooking back at the memorable starting point, YESIST 12 was SS12(meaning Saturday Sunday 12 hours) a humanitarian themed hackathon for students of the USA. Then it unfolded to Erode and Asia, now it has outspread to more than 9 countries, far-reaching 2000 above and beyond. Entailing many budding Innovators and entrepreneurs from around the world on building engineering solutions for the societal issues in various domains.</string>
-    <string name="call_for_pilots_header">Call for Pilots</string>
+    <string name="call_for_abstracts_header">Call for Abstracts</string>
     <string name="call_for_pilots_description">Pilots are selected all over the world for conducting the prelims of IEEE YESIST12. Click the below link to know more detail</string>
     <string name="register_now_button_text">Register Now</string>
     <string name="default_notification_channel_id">com.ieee.ieee_yesist.default</string>
+    <string name="submit_now_button_text">Submit Now</string>
+    <string name="call_for_abstracts_description">Abstract Submission Has Started Click the button below to submit your abstract</string>
 
 </resources>

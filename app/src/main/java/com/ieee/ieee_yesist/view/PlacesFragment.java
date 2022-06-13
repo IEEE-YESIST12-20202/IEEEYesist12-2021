@@ -72,7 +72,7 @@ public class PlacesFragment extends Fragment implements OnPlaceClickListener {
         placeRV = binding.RVplaces;
         placeModelArrayList = new ArrayList<PlaceModel>();
 
-        Glide.with(requireActivity()).load("https://media-cdn.tripadvisor.com/media/photo-s/03/9b/2f/3a/bangalore.jpg").into(binding.bengImage);
+        Glide.with(requireActivity()).load("https://i.pinimg.com/originals/85/c4/c3/85c4c3131f7c4861d209c1f2a9f38408.jpg").into(binding.bengImage);
 
         placeAdapter = new PlaceAdapter(requireActivity(),placeModelArrayList);
         placeAdapter.setClickListener(this);
