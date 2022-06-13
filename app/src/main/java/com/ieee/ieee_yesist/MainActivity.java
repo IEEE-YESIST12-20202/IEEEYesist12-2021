@@ -33,6 +33,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.ieee.ieee_yesist.databinding.ActivityMainBinding;
 import com.ieee.ieee_yesist.util.ConnectionUtil;
 import com.ieee.ieee_yesist.view.AboutUsFragment;
+import com.ieee.ieee_yesist.view.PlacesFragment;
 import com.ieee.ieee_yesist.view.SponsorsFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.tracksFragment, R.id.aboutTeamFragment, R.id.trendingFragment,
                 R.id.trackDetailsFragment, R.id.professionalInfoFragment, R.id.sterringCommitteeFragment, R.id.subCommitteeFragment,
-                R.id.sponsorsFragment, R.id.faqFragment, R.id.faqDetailFragment, R.id.aboutUsFragment)
+                R.id.sponsorsFragment, R.id.faqFragment, R.id.faqDetailFragment, R.id.aboutUsFragment,R.id.placesFragment,R.id.onePlaceFragment)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -117,12 +118,16 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.sponsorsFragment) {
-                bottomNavigationView.setVisibility(View.GONE);
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new SponsorsFragment()).commit();
             }
             if (item.getItemId() == R.id.aboutUsFragment) {
                 bottomNavigationView.setVisibility(View.GONE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new AboutUsFragment()).commit();
+            }
+            if(item.getItemId() == R.id.placesFragment)
+            {
+
             }
             if (item.getItemId() == R.id.shareApp) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);

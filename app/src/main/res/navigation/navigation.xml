@@ -97,4 +97,14 @@
         android:name="com.ieee.ieee_yesist.view.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/placesFragment"
+        android:name="com.ieee.ieee_yesist.view.PlacesFragment"
+        android:label="fragment_places"
+        tools:layout="@layout/fragment_places" />
+    <fragment
+        android:id="@+id/onePlaceFragment"
+        android:name="com.ieee.ieee_yesist.view.OnePlaceFragment"
+        android:label="OnePlaceFragment"
+        tools:layout="@layout/fragment_one_place"/>
 </navigation>
