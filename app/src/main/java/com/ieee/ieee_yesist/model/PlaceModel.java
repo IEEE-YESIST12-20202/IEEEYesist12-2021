@@ -1,5 +1,9 @@
 package com.ieee.ieee_yesist.model;
 
+import android.location.Location;
+
+import com.google.firebase.firestore.GeoPoint;
+
 public class PlaceModel {
     String image1;
     String name;
@@ -7,6 +11,7 @@ public class PlaceModel {
     String location;
     String description;
     Float stars;
+    GeoPoint latlang;
 
 
     public PlaceModel()
@@ -36,5 +41,9 @@ public class PlaceModel {
 
     public Float getStars() {
         return stars;
+    }
+
+    public GeoPoint getLatlang() {
+        return latlang;
     }
 }

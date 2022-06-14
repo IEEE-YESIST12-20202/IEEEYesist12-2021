@@ -161,7 +161,9 @@ public class PlacesFragment extends Fragment implements OnPlaceClickListener {
         bundle.putString("location", model.getLocation());
         bundle.putString("description", model.getDescription());
         bundle.putString("image", model.getImage1());
-        bundle.putFloat("rating",model.getStars());// Put anything what you want
+        bundle.putFloat("rating",model.getStars());
+        bundle.putDouble("Latitude",model.getLatlang().getLatitude());
+        bundle.putDouble("Longitude",model.getLatlang().getLongitude());// Put anything what you want
 
 
 

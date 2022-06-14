@@ -3,6 +3,8 @@ package com.ieee.ieee_yesist;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -13,6 +15,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     DrawerLayout drawer;
     private boolean firstTimeOpen;
+
 
     @Override
     protected void onResume() {
@@ -98,6 +102,17 @@ public class MainActivity extends AppCompatActivity {
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
         }
+
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -158,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
         closeNav.setOnClickListener(v -> binding.drawerLayout.closeDrawer(GravityCompat.START));
 
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
