@@ -104,17 +104,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textSize="20sp"
             android:textColor="@color/black"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.038"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/nav"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/nav"
             android:src="@drawable/ic_baseline_near_me_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -139,13 +139,27 @@
             app:layout_constraintTop_toBottomOf="@+id/opname2" />
 
         <TextView
+            android:id="@+id/distance"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/poppins"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/simpleRatingBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.56"
+             />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Bengaluru , Karnataka"
-            android:textSize="13sp"
-            android:textColor="@color/black"
             android:fontFamily="@font/poppins"
+            android:text="Bengaluru , Karnataka"
+            android:textColor="@color/black"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.056"
@@ -170,7 +184,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Description"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.047"
             app:layout_constraintStart_toStartOf="parent"
@@ -181,7 +195,7 @@
             android:id="@+id/placeDescription"
             android:layout_width="0dp"
             android:scrollbars="vertical"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
             android:padding="4dp"
@@ -190,7 +204,7 @@
             android:fontFamily="@font/poppins"
             android:textColor="@color/black"
 
-            android:textSize="20dp"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
 
@@ -213,6 +227,10 @@
 
   -->
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        />
 
 
 
