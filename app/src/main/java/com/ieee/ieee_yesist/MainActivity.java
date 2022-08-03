@@ -36,6 +36,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.ieee.ieee_yesist.databinding.ActivityMainBinding;
 import com.ieee.ieee_yesist.util.ConnectionUtil;
 import com.ieee.ieee_yesist.view.AboutUsFragment;
+import com.ieee.ieee_yesist.view.FinalPageFragment;
 import com.ieee.ieee_yesist.view.PlacesFragment;
 import com.ieee.ieee_yesist.view.SponsorsFragment;
 
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.tracksFragment, R.id.aboutTeamFragment, R.id.trendingFragment,
                 R.id.trackDetailsFragment, R.id.professionalInfoFragment, R.id.sterringCommitteeFragment, R.id.subCommitteeFragment,
-                R.id.sponsorsFragment, R.id.faqFragment, R.id.faqDetailFragment, R.id.aboutUsFragment,R.id.placesFragment,R.id.onePlaceFragment)
+                R.id.sponsorsFragment, R.id.faqFragment, R.id.faqDetailFragment, R.id.aboutUsFragment,R.id.placesFragment,R.id.onePlaceFragment,R.id.finalPageFragment)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -143,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
             if(item.getItemId() == R.id.placesFragment)
             {
 
+            }
+            if (item.getItemId() == R.id.finalPageFragment)
+            {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost,new FinalPageFragment()).commit();
             }
             if (item.getItemId() == R.id.shareApp) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);

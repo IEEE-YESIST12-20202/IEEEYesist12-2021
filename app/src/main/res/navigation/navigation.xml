@@ -115,4 +115,23 @@
             android:id="@+id/action_onePlaceFragment_to_placesFragment"
             app:destination="@id/placesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/finalPageFragment"
+        android:name="com.ieee.ieee_yesist.view.FinalPageFragment"
+        android:label="fragment_final_page"
+        tools:layout="@layout/fragment_final_page" >
+        <action
+            android:id="@+id/action_finalPageFragment_to_accomodationFragment"
+            app:destination="@id/accomodationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accomodationFragment"
+        android:name="com.ieee.ieee_yesist.view.AccomodationFragment"
+        android:label="fragment_accomodation"
+        tools:layout="@layout/fragment_accomodation" >
+        <action
+            android:id="@+id/action_accomodationFragment_to_finalPageFragment"
+            app:destination="@id/finalPageFragment" />
+    </fragment>
+
 </navigation>
