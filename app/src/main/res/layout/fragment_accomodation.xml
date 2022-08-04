@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="26dp"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.AccomodationFragment">
@@ -50,9 +51,9 @@
 
         android:id="@+id/RVaccomodations"
         android:layout_width="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/nav_header_vertical_spacing"
         android:layout_height="wrap_content"
-        android:padding="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header"
