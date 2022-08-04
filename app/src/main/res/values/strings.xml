@@ -891,5 +891,7 @@ Stephen Okwiri</string>
     <string name="default_notification_channel_id">com.ieee.ieee_yesist.default</string>
     <string name="submit_now_button_text">Submit Now</string>
     <string name="call_for_abstracts_description">Abstract Submission Has Started Click the button below to submit your abstract</string>
+    <string name="VenueName">Sri Venkateshwara College of Engineering, Bangalore​</string>
+    <string name="venueAddress">Sri Venkateshwara College of Engineering Vidyanagar, Kempegowda International Airport Road, Bengaluru – 562 157.</string>
 
 </resources>
