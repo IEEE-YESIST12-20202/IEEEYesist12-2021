@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.databinding.FragmentFinalPageBinding;
+import com.ieee.ieee_yesist.util.PhotoFullPopupWindow;
 
 
 public class FinalPageFragment extends Fragment {
@@ -47,6 +48,14 @@ public class FinalPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(requireView()).navigate(R.id.action_finalPageFragment_to_accomodationFragment);
+            }
+        });
+        binding.viewMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Code to show image in full screen:
+                new PhotoFullPopupWindow(getActivity(), R.layout.popup_photo_full, view, R.drawable.bangalore_map);
+
             }
         });
     }
