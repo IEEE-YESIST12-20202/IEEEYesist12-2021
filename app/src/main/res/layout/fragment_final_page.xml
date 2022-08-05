@@ -323,6 +323,14 @@ android:orientation="vertical">
                 android:textSize="24sp"
                 android:textStyle="normal" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Map"
+                android:layout_marginHorizontal="18dp"
+                android:id="@+id/viewMapButton"
+                android:fontFamily="@font/poppins_bold">
+            </Button>
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
@@ -511,4 +519,4 @@ android:orientation="vertical">
 
 
 
-</FrameLayout>
+</RelativeLayout>
