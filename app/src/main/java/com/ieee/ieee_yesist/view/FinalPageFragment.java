@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.transition.AutoTransition;
+import androidx.transition.TransitionManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,32 +66,34 @@ public class FinalPageFragment extends Fragment {
                 startActivity(mapIntent);
             }
         });
-        binding.arrowDown.setOnClickListener(new View.OnClickListener() {
+        binding.reachByTaxiCardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(binding.byTaxiDes.getVisibility() == View.VISIBLE)
                 {
+                    TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
                     binding.byTaxiDes.setVisibility(View.GONE);
                     binding.arrowDown.setImageResource(R.drawable.ic__arrow_down);
                 }
                 else
                 {
+                    TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
                     binding.byTaxiDes.setVisibility(View.VISIBLE);
                     binding.arrowDown.setImageResource(R.drawable.ic_arrow_up);
                 }
             }
         });
 
-        binding.pubTransArrowDown.setOnClickListener(new View.OnClickListener() {
+        binding.reachByPublicTransportCardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(binding.publicTransportDescription.getVisibility() == View.VISIBLE)
-                {
+                if(binding.publicTransportDescription.getVisibility()==View.VISIBLE){
+                    TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
                     binding.publicTransportDescription.setVisibility(View.GONE);
                     binding.pubTransArrowDown.setImageResource(R.drawable.ic__arrow_down);
                 }
-                else
-                {
+                else {
+                    TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
                     binding.publicTransportDescription.setVisibility(View.VISIBLE);
                     binding.pubTransArrowDown.setImageResource(R.drawable.ic_arrow_up);
                 }
