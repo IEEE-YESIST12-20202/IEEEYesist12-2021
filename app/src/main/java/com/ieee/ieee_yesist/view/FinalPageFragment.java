@@ -1,5 +1,6 @@
 package com.ieee.ieee_yesist.view;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.databinding.FragmentFinalPageBinding;
@@ -90,6 +92,32 @@ public class FinalPageFragment extends Fragment {
                 {
                     binding.publicTransportDescription.setVisibility(View.VISIBLE);
                     binding.pubTransArrowDown.setImageResource(R.drawable.ic_arrow_up);
+                }
+            }
+        });
+
+        binding.svgWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+                try {
+                    intent.setData(Uri.parse("https://www.svcengg.edu.in/"));
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    Toast.makeText(getContext(), "Error text", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        binding.svg3Dtour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+                try {
+                    intent.setData(Uri.parse("https://www.easytourz.com/BT-EmabedTour/all/5d111f3d2f317eb1"));
+                    startActivity(intent);
+                } catch (ActivityNotFoundException exception) {
+                    Toast.makeText(getContext(), "Error text", Toast.LENGTH_SHORT).show();
                 }
             }
         });

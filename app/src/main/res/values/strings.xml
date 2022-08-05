@@ -894,6 +894,7 @@ Stephen Okwiri</string>
     <string name="VenueName">Sri Venkateshwara College of Engineering, Bangalore​</string>
     <string name="venueAddress">Sri Venkateshwara College of Engineering Vidyanagar, Kempegowda International Airport Road, Bengaluru – 562 157.</string>
     <string name="reachbytaxi">Catch a taxi from the nearest taxi stand across from the airport. Most taxis are medium-sized passenger vehicles but are charged the same as a general taxi. Taxi fares from the airport to the hotel are fixed, so confirm the fare prior to departure.</string>
-    <string name="byPublicMeans"><b>From Airport</b> /n Get on a Bus and Get off at the ‘Sri Venkateswara College of Engineering.\n \n<b>From Majestic Bus Terminal</b> /n Get on at the Majestic Bus Terminal (Bus: 282B and 282F) Get off at the Sri Venkateswara College of Engineering. \n \n<b>From East Railway station</b> \n Get on at the East Railway Station (Bus: 292D, 295D and 296D) Get off at the Sri Venkateswara College of Engineering</string>
+    <string name="byPublicMeans"><b>From Airport</b>\nGet on a Bus and Get off at the ‘Sri Venkateswara College of Engineering.\n \n<b>From Majestic Bus Terminal</b>\nGet on at the Majestic Bus Terminal (Bus: 282B and 282F) Get off at the Sri Venkateswara College of Engineering. \n \n<b>From East Railway station</b> \nGet on at the East Railway Station (Bus: 292D, 295D and 296D) Get off at the Sri Venkateswara College of Engineering</string>
+    <string name="telN0">+919731226262</string>
 
 </resources>

@@ -22,10 +22,10 @@
 <!--        android:enabled="true"-->
 <!--        android:icon="@drawable/ic_aboutteam" />-->
     <item
-        android:id="@+id/aboutUsFragment"
-        android:title="About Us"
+        android:id="@+id/finalPageFragment"
+        android:title="Finale"
         android:enabled="true"
-        android:icon="@drawable/ic_aboutus" />
+        android:icon="@drawable/ic_baseline_near_me_24" />
     <item
         android:id="@+id/more_options"
         android:title="More"
