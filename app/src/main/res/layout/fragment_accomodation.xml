@@ -25,10 +25,10 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/pf_header"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/pf_header"
@@ -51,13 +51,13 @@
 
         android:id="@+id/RVaccomodations"
         android:layout_width="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/nav_header_vertical_spacing"
+        android:paddingBottom="120dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/accomodation_item"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

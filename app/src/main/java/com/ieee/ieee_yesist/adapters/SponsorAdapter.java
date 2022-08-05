@@ -45,7 +45,8 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.ViewHold
         cpd.start();
         Glide.with(context)
              .load(sponsorList.get(position).getImgUrl())
-             .placeholder(cpd)
+                .thumbnail(0.05f)
+                .placeholder(cpd)
              .into(holder.sponsorImg);
 
         holder.sponsorImg.setOnClickListener(v -> {

@@ -71,7 +71,7 @@ public class OnePlaceFragment extends Fragment {
         binding.placeDescription.setText(bundle.getString("description"));
         binding.placeDescription.setMovementMethod(new ScrollingMovementMethod());
         binding.simpleRatingBar.setRating(bundle.getFloat("rating"));
-        Glide.with(requireActivity()).load(bundle.getString("image")).into(binding.oneplaceimage);
+        Glide.with(requireActivity()).load(bundle.getString("image")).thumbnail(0.05f).into(binding.oneplaceimage);
 
 
 

@@ -53,7 +53,7 @@ public class AccomodationAdapter extends RecyclerView.Adapter<AccomodationAdapte
         AccomodationModel model = accomodationModelArrayList.get(holder.getAdapterPosition());
         holder.accName.setText(model.getName());
         holder.accAddress.setText(model.getAddress());
-        Glide.with(context).load(model.getImage()).into(holder.accImage);
+        Glide.with(context).load(model.getImage()).thumbnail(0.05f).into(holder.accImage);
 
     }
 

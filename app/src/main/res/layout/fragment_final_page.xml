@@ -323,14 +323,19 @@ android:orientation="vertical">
                 android:textSize="24sp"
                 android:textStyle="normal" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
                 android:text="View Map"
+                android:fontFamily="@font/nunito_extrabold"
                 android:layout_marginHorizontal="18dp"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/viewMapButton"
-                android:fontFamily="@font/poppins_bold">
-            </Button>
+                app:cornerRadius="12dp"
+                android:backgroundTint="@color/colorSecondary"
+                >
+            </com.google.android.material.button.MaterialButton>
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
@@ -497,7 +502,7 @@ android:orientation="vertical">
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
-                android:text="Accomodations"
+                android:text="View Accomodations"
                 android:fontFamily="@font/nunito_extrabold"
                 android:layout_marginHorizontal="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -519,4 +524,4 @@ android:orientation="vertical">
 
 
 
-</RelativeLayout>
+</FrameLayout>

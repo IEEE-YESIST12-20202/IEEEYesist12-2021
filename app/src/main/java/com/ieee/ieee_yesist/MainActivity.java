@@ -134,13 +134,15 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.sponsorsFragment) {
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new SponsorsFragment()).commit();
+                bottomNavigationView.setVisibility(View.GONE);
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new SponsorsFragment()).commit();
             }
             if (item.getItemId() == R.id.aboutUsFragment) {
                 bottomNavigationView.setVisibility(View.GONE);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new AboutUsFragment()).commit();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new AboutUsFragment()).commit();
             }
+
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new AboutUsFragment()).commit();
             if(item.getItemId() == R.id.placesFragment)
             {
 

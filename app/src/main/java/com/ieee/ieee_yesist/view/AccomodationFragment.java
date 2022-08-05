@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,6 +45,12 @@ public class AccomodationFragment extends Fragment implements OnAccomodationClic
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
     binding = FragmentAccomodationBinding.inflate(inflater,container,false);
+        binding.backButton.setOnClickListener( v -> {
+            Navigation.findNavController(requireActivity(), R.id.fragNavHost).popBackStack();
+            BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView);
+            if(bottomNavigationView.getVisibility() == View.GONE)
+                bottomNavigationView.setVisibility(View.VISIBLE);
+        });
     View view = binding.getRoot();
     return view;
     }

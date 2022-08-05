@@ -49,7 +49,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.Viewholder>{
         holder.pname.setText(model.getName());
         Glide.with(context)
                 .load(model.getImage1())
-
+                .thumbnail(0.05f)
                 .into(holder.pimage);
 
 
