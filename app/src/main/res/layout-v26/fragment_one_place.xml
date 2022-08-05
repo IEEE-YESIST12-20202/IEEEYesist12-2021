@@ -112,9 +112,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
             android:id="@+id/nav"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
             android:src="@drawable/ic_baseline_near_me_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,5 +1,7 @@
 package com.ieee.ieee_yesist.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,6 +49,48 @@ public class FinalPageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(requireView()).navigate(R.id.action_finalPageFragment_to_accomodationFragment);
+            }
+        });
+
+
+        binding.navigateToFinale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=Sri+Venkateshwara+College+of+Engineering+Vidyanagar,+Kempegowda+International+Airport+Road,+Bengaluru");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
+        binding.arrowDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.byTaxiDes.getVisibility() == View.VISIBLE)
+                {
+                    binding.byTaxiDes.setVisibility(View.GONE);
+                    binding.arrowDown.setImageResource(R.drawable.ic__arrow_down);
+                }
+                else
+                {
+                    binding.byTaxiDes.setVisibility(View.VISIBLE);
+                    binding.arrowDown.setImageResource(R.drawable.ic_arrow_up);
+                }
+            }
+        });
+
+        binding.pubTransArrowDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.publicTransportDescription.getVisibility() == View.VISIBLE)
+                {
+                    binding.publicTransportDescription.setVisibility(View.GONE);
+                    binding.pubTransArrowDown.setImageResource(R.drawable.ic__arrow_down);
+                }
+                else
+                {
+                    binding.publicTransportDescription.setVisibility(View.VISIBLE);
+                    binding.pubTransArrowDown.setImageResource(R.drawable.ic_arrow_up);
+                }
             }
         });
     }

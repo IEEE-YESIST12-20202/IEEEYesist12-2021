@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             }
             if (item.getItemId() == R.id.finalPageFragment)
             {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost,new FinalPageFragment()).commit();
+
             }
             if (item.getItemId() == R.id.shareApp) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);

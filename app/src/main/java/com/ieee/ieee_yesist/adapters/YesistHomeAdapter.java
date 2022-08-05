@@ -1,5 +1,6 @@
 package com.ieee.ieee_yesist.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class YesistHomeAdapter extends RecyclerView.Adapter<YesistHomeAdapter.Ye
     }
 
     @Override
-    public void onBindViewHolder(@NonNull YesistHomeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull YesistHomeViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.ques.setText(yesistHomeList.get(position).getQuesName());
         //holder.reason.setText(yesistHomeList.get(position).getQuesReason());
 
