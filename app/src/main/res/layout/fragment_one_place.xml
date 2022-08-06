@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/nunito_extrabold"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -105,6 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textColor="@color/black"
+            android:fontFamily="@font/nunito_semi_bold"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.038"
@@ -150,13 +151,14 @@
             app:layout_constraintStart_toEndOf="@+id/simpleRatingBar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.56"
+            android:visibility="gone"
              />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/nunito_extrabold"
             android:text="Bengaluru , Karnataka"
             android:textColor="@color/black"
             android:textSize="13sp"
@@ -181,7 +183,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/nunito_extrabold"
             android:text="Description"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -201,7 +203,7 @@
             android:padding="4dp"
 
             android:justificationMode="inter_word"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/nunitoregular"
             android:textColor="@color/black"
 
             android:textSize="18dp"
