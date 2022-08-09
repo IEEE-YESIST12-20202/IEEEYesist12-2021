@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/nunito_extrabold"
+                    android:fontFamily="@font/poppins"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -78,10 +78,6 @@
         android:layout_width="match_parent"
         android:layout_height="180dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <ImageView
                 android:id="@+id/oneplaceimage"
                 android:layout_width="match_parent"
@@ -91,36 +87,38 @@
             </ImageView>
 
 
-        </RelativeLayout>
+
 
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/opname2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Name of Place"
             android:textColor="@color/black"
-            android:fontFamily="@font/nunito_semi_bold"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.038"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/nav"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
             android:src="@drawable/ic_baseline_near_me_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.911"
-            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintVertical_bias="0.65"
+        app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RatingBar
@@ -128,43 +126,43 @@
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13sp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="4dp"
             android:numStars="5"
             android:scaleX="1.5"
-            android:scaleY="1.5"
 
+            android:scaleY="1.5"
             android:theme="@style/RatingBar"
-            app:layout_constraintEnd_toStartOf="@+id/nav"
-            app:layout_constraintHorizontal_bias="0.127"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/opname2" />
 
+
         <TextView
             android:id="@+id/distance"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_marginEnd="12dp"
             android:fontFamily="@font/poppins"
-            android:textSize="15dp"
+            android:text="distance"
+            android:textColor="@color/black"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/simpleRatingBar"
+            app:layout_constraintEnd_toStartOf="@+id/nav"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.56"
-            android:visibility="gone"
-             />
+            app:layout_constraintVertical_bias="0.65"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/nunito_extrabold"
+            android:fontFamily="@font/poppins"
             android:text="Bengaluru , Karnataka"
             android:textColor="@color/black"
-            android:textSize="13sp"
+            android:textSize="12sp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.056"
+            app:layout_constraintTop_toBottomOf="@id/simpleRatingBar"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -176,40 +174,40 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipChildren="false">
 
         <TextView
             android:id="@+id/placeDescpritionHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/nunito_extrabold"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_bold"
             android:text="Description"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
+            android:textSize="18sp"
+            android:layout_marginLeft="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
             android:id="@+id/placeDescription"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:scrollbars="vertical"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="16dp"
-            android:padding="4dp"
-
-            android:justificationMode="inter_word"
-            android:fontFamily="@font/nunitoregular"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/nunito_font"
             android:textColor="@color/black"
-
-            android:textSize="18dp"
+            android:text="Place description"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-
+            android:lineSpacingExtra="6dp"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/placeDescpritionHeader" />
 
@@ -229,6 +227,7 @@
 
   -->
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 

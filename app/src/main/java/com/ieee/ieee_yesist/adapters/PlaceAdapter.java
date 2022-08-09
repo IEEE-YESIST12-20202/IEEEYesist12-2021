@@ -8,11 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.model.OnPlaceClickListener;
 import com.ieee.ieee_yesist.model.PlaceModel;
@@ -39,7 +37,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.Viewholder>{
     @NonNull
     @Override
     public PlaceAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.place,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_place,parent,false);
         return new Viewholder(view);
     }
 
