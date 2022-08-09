@@ -1,5 +1,6 @@
 package com.ieee.ieee_yesist.view;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -46,7 +47,6 @@ public class OnePlaceFragment extends Fragment {
     FusedLocationProviderClient client;
 
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -59,12 +59,6 @@ public class OnePlaceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
-
-
-
-
-
         binding.onePlacename.setText(bundle.getString("name"));
         binding.opname2.setText(bundle.getString("name"));
 
@@ -74,12 +68,10 @@ public class OnePlaceFragment extends Fragment {
         Glide.with(requireActivity()).load(bundle.getString("image")).thumbnail(0.05f).into(binding.oneplaceimage);
 
 
-
-
         binding.nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("google.navigation:q="+bundle.getString("location"));
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + bundle.getString("location"));
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
@@ -93,7 +85,7 @@ public class OnePlaceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        binding = FragmentOnePlaceBinding.inflate(inflater,container,false);
+        binding = FragmentOnePlaceBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         bundle = this.getArguments();
 
@@ -104,17 +96,16 @@ public class OnePlaceFragment extends Fragment {
         getCurrentLocation();
 
 
-
-        return  view;
+        return view;
         // Inflate the layout for this fragment
 
     }
 
-    @SuppressLint("MissingPermission")
+
     private void getCurrentLocation() {
 
         LocationManager locationManager
-                = (LocationManager)getActivity()
+                = (LocationManager) getActivity()
                 .getSystemService(
                         Context.LOCATION_SERVICE);
         // Check condition
@@ -124,12 +115,16 @@ public class OnePlaceFragment extends Fragment {
                 LocationManager.NETWORK_PROVIDER)) {
             // When location service is enabled
             // Get last location
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+                return;
+            }
             client.getLastLocation().addOnCompleteListener(
                     new OnCompleteListener<Location>() {
                         @Override
                         public void onComplete(
-                                @NonNull Task<Location> task)
-                        {
+                                @NonNull Task<Location> task) {
 
                             // Initialize location
                             Location location
@@ -138,9 +133,8 @@ public class OnePlaceFragment extends Fragment {
                             if (location != null) {
                                 // When location result is not
                                 // null set latitude
-                            binding.distance.setText(getDistance(location));
-                            }
-                            else {
+                                binding.distance.setText(getDistance(location));
+                            } else {
                                 // When location result is null
                                 // initialize location request
                                 LocationRequest locationRequest
@@ -161,19 +155,22 @@ public class OnePlaceFragment extends Fragment {
                                     public void
                                     onLocationResult(
                                             LocationResult
-                                                    locationResult)
-                                    {
+                                                    locationResult) {
                                         // Initialize
                                         // location
                                         Location location1
                                                 = locationResult
                                                 .getLastLocation();
                                         // Set latitude
-                                       binding.distance.setText(getDistance(location1));
+                                        binding.distance.setText(getDistance(location1));
                                     }
                                 };
 
-                                // Request location updates
+                                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                                    ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+                                    return;
+                                }
                                 client.requestLocationUpdates(
                                         locationRequest,
                                         locationCallback,

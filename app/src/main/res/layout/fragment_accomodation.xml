@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="26dp"
+    android:paddingBottom="57dp"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.AccomodationFragment">
@@ -64,15 +64,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header"
-            tools:listitem="@layout/item_accomodation" />
+            tools:listitem="@layout/item_accomodation"
+            android:paddingBottom="100dp"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_constraintTop_toBottomOf="@id/RVaccomodations"
-             />
+
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
