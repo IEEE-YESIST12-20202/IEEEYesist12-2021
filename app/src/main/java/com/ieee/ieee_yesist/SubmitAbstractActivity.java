@@ -13,6 +13,7 @@ public class SubmitAbstractActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String url = getIntent().getStringExtra("url");
 //        setContentView(R.layout.activity_register);
         myWebView = new WebView(SubmitAbstractActivity.this);
         WebSettings webSettings = myWebView.getSettings();
@@ -20,7 +21,7 @@ public class SubmitAbstractActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         myWebView.setWebViewClient(new WebViewClient());
         setContentView(myWebView);
-        myWebView.loadUrl("https://ieeeyesist12.org/abstract-submission/");
+        myWebView.loadUrl(url);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
