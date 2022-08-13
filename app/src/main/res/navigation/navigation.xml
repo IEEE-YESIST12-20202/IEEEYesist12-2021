@@ -133,5 +133,11 @@
             android:id="@+id/action_accomodationFragment_to_finalPageFragment"
             app:destination="@id/finalPageFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.ieee.ieee_yesist.view.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification">
+    </fragment>
 
 </navigation>
