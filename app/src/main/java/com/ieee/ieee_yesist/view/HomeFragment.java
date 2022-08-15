@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,6 +52,13 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         yesistRecyler=view.findViewById(R.id.yesist_recycler);
+
+        view.findViewById(R.id.home_bell_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_notificationFragment);
+            }
+        });
 
         Crisp.configure(getActivity().getApplicationContext(), "35d59f9c-e6df-416d-9364-5356d91fc5df");
         FloatingActionButton fab = view.findViewById(R.id.fab);

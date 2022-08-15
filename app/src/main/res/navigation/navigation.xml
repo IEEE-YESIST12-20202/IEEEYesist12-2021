@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.ieee.ieee_yesist.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+    <action
+        android:id="@+id/action_homeFragment_to_notificationFragment"
+        app:destination="@id/notificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tracksFragment"
         android:name="com.ieee.ieee_yesist.view.Tracks.TracksFragment"
@@ -138,6 +142,9 @@
         android:name="com.ieee.ieee_yesist.view.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification">
+        <action
+            android:id="@+id/action_notificationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
 </navigation>

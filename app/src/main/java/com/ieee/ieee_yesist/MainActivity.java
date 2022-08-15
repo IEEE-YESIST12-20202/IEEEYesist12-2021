@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDestinationChanged(@NonNull NavController controller,
                                              @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if((destination.getId() == R.id.placesFragment) || (destination.getId() == R.id.sponsorsFragment) || (destination.getId() == R.id.aboutUsFragment) || (destination.getId() == R.id.onePlaceFragment)){
+                if((destination.getId() == R.id.placesFragment) || (destination.getId() == R.id.sponsorsFragment) || (destination.getId() == R.id.aboutUsFragment) || (destination.getId() == R.id.onePlaceFragment) || (destination.getId() == R.id.notificationFragment)){
                     bottomNavigationView.setVisibility(View.GONE);
                 } else {
                     bottomNavigationView.setVisibility(View.VISIBLE);
