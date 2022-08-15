@@ -2,6 +2,7 @@ package com.ieee.ieee_yesist.view;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,32 +12,41 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.adapters.AccomodationAdapter;
+import com.ieee.ieee_yesist.adapters.NotificationHistoryAdapter;
 import com.ieee.ieee_yesist.databinding.FragmentAccomodationBinding;
+import com.ieee.ieee_yesist.databinding.FragmentNotificationBinding;
 import com.ieee.ieee_yesist.model.AccomodationModel;
-import com.ieee.ieee_yesist.model.OnAccomodationClickListener;
+import com.ieee.ieee_yesist.model.NotificationModel;
+import com.ieee.ieee_yesist.model.Sponsor;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
+/**
+]
+ */
+public class NotificationFragment extends Fragment {
 
-public class AccomodationFragment extends Fragment implements OnAccomodationClickListener {
-
-   private FragmentAccomodationBinding binding;
-   private  RecyclerView accomodationRV;
-   private ArrayList<AccomodationModel> accomodationModelArrayList;
-   private FirebaseFirestore db;
-   private AccomodationAdapter accomodationAdapter;
+    private FragmentNotificationBinding binding;
+    private RecyclerView notificationRV;
+    private ArrayList<NotificationModel> notificationModelArrayList;
+    private FirebaseFirestore db;
+    private NotificationHistoryAdapter notifcationAdapter;
 
 
 
@@ -44,15 +54,13 @@ public class AccomodationFragment extends Fragment implements OnAccomodationClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-    binding = FragmentAccomodationBinding.inflate(inflater,container,false);
+        binding = FragmentNotificationBinding.inflate(inflater,container,false);
         binding.backButton.setOnClickListener( v -> {
             Navigation.findNavController(requireActivity(), R.id.fragNavHost).popBackStack();
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView);
-            if(bottomNavigationView.getVisibility() == View.GONE)
-                bottomNavigationView.setVisibility(View.VISIBLE);
         });
-    View view = binding.getRoot();
-    return view;
+        View view = binding.getRoot();
+        return view;
     }
 
     @Override
@@ -60,21 +68,19 @@ public class AccomodationFragment extends Fragment implements OnAccomodationClic
         super.onViewCreated(view, savedInstanceState);
 
         db = FirebaseFirestore.getInstance();
-        accomodationRV = binding.RVaccomodations;
-        accomodationModelArrayList = new ArrayList<AccomodationModel>();
+        notificationRV = binding.RVnotifications;
+        notificationModelArrayList = new ArrayList<NotificationModel>();
 
-        accomodationAdapter = new AccomodationAdapter(requireActivity(),accomodationModelArrayList);
-        accomodationAdapter.setClickListener(this);
-
+        notifcationAdapter = new NotificationHistoryAdapter(requireActivity(),notificationModelArrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
-        accomodationRV.setAdapter(accomodationAdapter);
-        accomodationRV.setLayoutManager(linearLayoutManager);
+        notificationRV.setAdapter(notifcationAdapter);
+        notificationRV.setLayoutManager(linearLayoutManager);
 
         EventChangeListener();
     }
 
     private void EventChangeListener() {
-        db.collection("accomodations")
+        db.collection("notifications")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -82,24 +88,21 @@ public class AccomodationFragment extends Fragment implements OnAccomodationClic
                         {
                             return;
                         }
-                        for(DocumentChange dc : value.getDocumentChanges())
-                        {
-                        if(dc.getType()==DocumentChange.Type.ADDED)
-                        {
-                            accomodationModelArrayList.add(dc.getDocument().toObject(AccomodationModel.class));
-                        }
-                        if(dc.getType()==DocumentChange.Type.REMOVED)
-                            accomodationModelArrayList.remove(dc.getDocument().toObject(AccomodationModel.class));
-                        accomodationAdapter.notifyDataSetChanged();
+                        if(!value.isEmpty())
+                            notificationModelArrayList.clear();
+                        for (QueryDocumentSnapshot doc : value) {
+                            if (doc != null) {
+                                NotificationModel notification = doc.toObject(NotificationModel.class);
+                                if(Timestamp.now().compareTo(notification.getExpiresOn())>0) {
+                                    continue;
+                                }
+                                notificationModelArrayList.add(notification);
+                                notifcationAdapter.notifyDataSetChanged();
+                            }
                         }
                     }
                 });
     }
 
-    @Override
-    public void onAccomodationClick(View view, int pos, AccomodationModel model) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(model.getGoLink()));
-        browserIntent.setPackage("com.android.chrome"); // Whatever browser you are using
-        startActivity(browserIntent);
-    }
+
 }
