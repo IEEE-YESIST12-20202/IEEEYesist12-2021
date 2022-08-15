@@ -88,6 +88,8 @@ public class AccomodationFragment extends Fragment implements OnAccomodationClic
                         {
                             accomodationModelArrayList.add(dc.getDocument().toObject(AccomodationModel.class));
                         }
+                        if(dc.getType()==DocumentChange.Type.REMOVED)
+                            accomodationModelArrayList.remove(dc.getDocument().toObject(AccomodationModel.class));
                         accomodationAdapter.notifyDataSetChanged();
                         }
                     }

@@ -143,9 +143,9 @@ public class PlacesFragment extends Fragment implements OnPlaceClickListener {
                             {
                                 placeModelArrayList.add(dc.getDocument().toObject(PlaceModel.class));
                             }
+                            if(dc.getType() ==  DocumentChange.Type.REMOVED)
+                                placeModelArrayList.remove(dc.getDocument().toObject(PlaceModel.class));
                             placeAdapter.notifyDataSetChanged();
-
-
                         }
                     }
                 });
