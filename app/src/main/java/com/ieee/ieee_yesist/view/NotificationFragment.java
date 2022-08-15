@@ -2,6 +2,7 @@ package com.ieee.ieee_yesist.view;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,15 +12,18 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.adapters.AccomodationAdapter;
@@ -28,7 +32,9 @@ import com.ieee.ieee_yesist.databinding.FragmentAccomodationBinding;
 import com.ieee.ieee_yesist.databinding.FragmentNotificationBinding;
 import com.ieee.ieee_yesist.model.AccomodationModel;
 import com.ieee.ieee_yesist.model.NotificationModel;
+import com.ieee.ieee_yesist.model.Sponsor;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -52,8 +58,6 @@ public class NotificationFragment extends Fragment {
         binding.backButton.setOnClickListener( v -> {
             Navigation.findNavController(requireActivity(), R.id.fragNavHost).popBackStack();
             BottomNavigationView bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView);
-            if(bottomNavigationView.getVisibility() == View.GONE)
-                bottomNavigationView.setVisibility(View.VISIBLE);
         });
         View view = binding.getRoot();
         return view;
@@ -84,13 +88,17 @@ public class NotificationFragment extends Fragment {
                         {
                             return;
                         }
-                        for(DocumentChange dc : value.getDocumentChanges())
-                        {
-                            if(dc.getType()==DocumentChange.Type.ADDED)
-                            {
-                                notificationModelArrayList.add(dc.getDocument().toObject(NotificationModel.class));
+                        if(!value.isEmpty())
+                            notificationModelArrayList.clear();
+                        for (QueryDocumentSnapshot doc : value) {
+                            if (doc != null) {
+                                NotificationModel notification = doc.toObject(NotificationModel.class);
+                                if(Timestamp.now().compareTo(notification.getExpiresOn())>0) {
+                                    continue;
+                                }
+                                notificationModelArrayList.add(notification);
+                                notifcationAdapter.notifyDataSetChanged();
                             }
-                            notifcationAdapter.notifyDataSetChanged();
                         }
                     }
                 });

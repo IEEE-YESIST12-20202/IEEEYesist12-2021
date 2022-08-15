@@ -46,29 +46,32 @@ public class NotificationHistoryAdapter extends RecyclerView.Adapter<Notificatio
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         NotificationModel model = notificationModelArrayList.get(holder.getAdapterPosition());
         holder.notificationBody.setText(model.getBody());
+        holder.notificationTitle.setText(model.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        if(notificationModelArrayList.size()<=10)
-        {
-            return  notificationModelArrayList.size();
-        }
-        return  10;
+        return  notificationModelArrayList.size();
+//
+//        if(notificationModelArrayList.size()<=10)
+//        {
+//            return  notificationModelArrayList.size();
+//        }
+//        return  10;
     }
 
 
     public class Viewholder extends RecyclerView.ViewHolder{
 
         private TextView notificationBody;
-
+        private TextView notificationTitle;
 
         public  Viewholder(@NonNull View itemView)
         {
             super(itemView);
 
             notificationBody = itemView.findViewById(R.id.notificationText);
-
+            notificationTitle = itemView.findViewById(R.id.notificationTitle);
         }
 
 

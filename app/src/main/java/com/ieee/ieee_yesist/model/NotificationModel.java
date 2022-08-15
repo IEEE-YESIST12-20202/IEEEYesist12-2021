@@ -1,10 +1,12 @@
 package com.ieee.ieee_yesist.model;
 
+import com.google.firebase.Timestamp;
+
 public class NotificationModel {
 
     String title;
     String body;
-    String date;
+    Timestamp expiresOn;
 
     public NotificationModel()
     {
@@ -18,7 +20,7 @@ public class NotificationModel {
         return body;
     }
 
-    public String getDate() {
-        return date;
+    public Timestamp getExpiresOn() {
+        return expiresOn;
     }
 }
