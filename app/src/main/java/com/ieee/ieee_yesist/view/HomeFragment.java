@@ -88,7 +88,11 @@ public class HomeFragment extends Fragment {
                     Button cardButton = view.findViewById(R.id.card_button);
                     Button submitButton = view.findViewById(R.id.card_button);
                     cardHeader.setText(doc.getString("card_header"));
+                    if (doc.getString("card_header").equals(""))
+                        cardHeader.setVisibility(View.GONE);
                     cardDescription.setText(doc.getString("card_description"));
+                    if (doc.getString("card_description").equals(""))
+                        cardDescription.setVisibility(View.GONE);
                     cardButton.setText(doc.getString("card_button_text"));
                     submitButton.setOnClickListener(new View.OnClickListener() {
                         @Override
