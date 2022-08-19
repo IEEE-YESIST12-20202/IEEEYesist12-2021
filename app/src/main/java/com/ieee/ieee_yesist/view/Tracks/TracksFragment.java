@@ -62,11 +62,11 @@ public class TracksFragment extends Fragment implements TrackListAdapter.OnTrack
     private void callApi() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest request = new JsonArrayRequest("https://ieeeyesist12.org/phpApp/track.php",
+        JsonArrayRequest request = new JsonArrayRequest(getString(R.string.firebase_database_url)+"/tracks.json",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
-                        Log.d("Response", String.valueOf(jsonArray));
+                        Log.d("Responsemeralauda", String.valueOf(jsonArray));
                         ArrayList<String> first = new ArrayList<>();
                         ArrayList<String> second = new ArrayList<>();
                         for(int i = 0; i < jsonArray.length(); i++) {
@@ -81,17 +81,17 @@ public class TracksFragment extends Fragment implements TrackListAdapter.OnTrack
 //                                Log.e("Error: " + e.toString());
                             }
                         }
-                        for(int j = 0; j < jsonArray.length(); j++) {
+
                             trackList = new ArrayList<>();
-                            trackList.add(new TrackList("Innovation Challenge", R.drawable.innovation, first.get(j),second.get(j)));
-                            trackList.add(new TrackList("Maker Fair", R.drawable.maker_fair,first.get(j),second.get(j)));
-                            trackList.add(new TrackList("Junior Einstein", R.drawable.jr_einstein,first.get(j),second.get(j)));
-                            trackList.add(new TrackList("WePOWER", R.drawable.wepower,first.get(j),second.get(j)));
-                            trackList.add(new TrackList("Special Track", R.drawable.special_track_new_bg,first.get(j),second.get(j)));
-                            trackList.add(new TrackList("IEngage Track", R.drawable.ie_engage_track,first.get(j),second.get(j)));
+                            trackList.add(new TrackList("Innovation Challenge", R.drawable.innovation, first.get(0),second.get(0)));
+                            trackList.add(new TrackList("Maker Fair", R.drawable.maker_fair,first.get(1),second.get(1)));
+                            trackList.add(new TrackList("Junior Einstein", R.drawable.jr_einstein,first.get(2),second.get(2)));
+                            trackList.add(new TrackList("WePOWER", R.drawable.wepower,first.get(3),second.get(3)));
+                            trackList.add(new TrackList("Special Track", R.drawable.special_track_new_bg,first.get(4),second.get(4)));
+                            trackList.add(new TrackList("IEngage Track", R.drawable.ie_engage_track,first.get(5),second.get(5)));
 
                             setTrackRecycler(trackList);
-                        }
+
                     }
                 },
                 new Response.ErrorListener() {
