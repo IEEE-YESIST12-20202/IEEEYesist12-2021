@@ -75,39 +75,40 @@ public class FinalPageFragment extends Fragment {
                 startActivity(mapIntent);
             }
         });
-        binding.reachByTaxiCardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(binding.byTaxiDes.getVisibility() == View.VISIBLE)
-                {
-                    TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
-                    binding.byTaxiDes.setVisibility(View.GONE);
-                    binding.arrowDown.setImageResource(R.drawable.ic__arrow_down);
-                }
-                else
-                {
-                    TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
-                    binding.byTaxiDes.setVisibility(View.VISIBLE);
-                    binding.arrowDown.setImageResource(R.drawable.ic_arrow_up);
-                }
-            }
-        });
 
-        binding.reachByPublicTransportCardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(binding.publicTransportDescription.getVisibility()==View.VISIBLE){
-                    TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
-                    binding.publicTransportDescription.setVisibility(View.GONE);
-                    binding.pubTransArrowDown.setImageResource(R.drawable.ic__arrow_down);
-                }
-                else {
-                    TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
-                    binding.publicTransportDescription.setVisibility(View.VISIBLE);
-                    binding.pubTransArrowDown.setImageResource(R.drawable.ic_arrow_up);
-                }
+        View.OnClickListener reachByTaxiOnClickListener = v -> {
+            if(binding.byTaxiDes.getVisibility() == View.VISIBLE)
+            {
+                TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
+                binding.byTaxiDes.setVisibility(View.GONE);
+                binding.arrowDown.setImageResource(R.drawable.ic__arrow_down);
             }
-        });
+            else
+            {
+                TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
+                binding.byTaxiDes.setVisibility(View.VISIBLE);
+                binding.arrowDown.setImageResource(R.drawable.ic_arrow_up);
+            }
+        };
+
+        binding.reachByTaxiCardview.setOnClickListener(reachByTaxiOnClickListener);
+        binding.arrowDown.setOnClickListener(reachByTaxiOnClickListener);
+
+        View.OnClickListener reachByPublicTransportOnClickListener = v -> {
+            if(binding.publicTransportDescription.getVisibility()==View.VISIBLE){
+                TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
+                binding.publicTransportDescription.setVisibility(View.GONE);
+                binding.pubTransArrowDown.setImageResource(R.drawable.ic__arrow_down);
+            }
+            else {
+                TransitionManager.beginDelayedTransition(binding.getRoot(), new AutoTransition());
+                binding.publicTransportDescription.setVisibility(View.VISIBLE);
+                binding.pubTransArrowDown.setImageResource(R.drawable.ic_arrow_up);
+            }
+        };
+
+        binding.reachByPublicTransportCardview.setOnClickListener(reachByPublicTransportOnClickListener);
+        binding.pubTransArrowDown.setOnClickListener(reachByPublicTransportOnClickListener);
 
         binding.svgWeb.setOnClickListener(new View.OnClickListener() {
             @Override

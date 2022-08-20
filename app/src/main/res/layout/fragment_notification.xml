@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="57dp"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.AccomodationFragment">
+>
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -38,7 +37,7 @@
             android:layout_marginTop="21dp"
             android:layout_marginBottom="26dp"
             android:fontFamily="@font/nunitoblack"
-            android:text="Accomodations"
+            android:text="Notification History"
             android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,28 +46,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/RVnotifications"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/RVaccomodations"
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header"
-            tools:listitem="@layout/item_accomodation"
-            android:paddingBottom="100dp"/>
-
-
-
-    </LinearLayout>
-
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        tools:listitem="@layout/notification_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

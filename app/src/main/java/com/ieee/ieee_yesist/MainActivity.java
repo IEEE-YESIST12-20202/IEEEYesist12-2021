@@ -1,6 +1,7 @@
 package com.ieee.ieee_yesist;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -8,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -132,25 +134,19 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller,
+                                             @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                if((destination.getId() == R.id.placesFragment) || (destination.getId() == R.id.sponsorsFragment) || (destination.getId() == R.id.aboutUsFragment) || (destination.getId() == R.id.onePlaceFragment) || (destination.getId() == R.id.notificationFragment)){
+                    bottomNavigationView.setVisibility(View.GONE);
+                } else {
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         navigationView.setNavigationItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.sponsorsFragment) {
-                bottomNavigationView.setVisibility(View.GONE);
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new SponsorsFragment()).commit();
-            }
-            if (item.getItemId() == R.id.aboutUsFragment) {
-                bottomNavigationView.setVisibility(View.GONE);
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new AboutUsFragment()).commit();
-            }
-
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragNavHost, new AboutUsFragment()).commit();
-            if(item.getItemId() == R.id.placesFragment)
-            {
-
-            }
-            if (item.getItemId() == R.id.finalPageFragment)
-            {
-
-            }
             if (item.getItemId() == R.id.shareApp) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");

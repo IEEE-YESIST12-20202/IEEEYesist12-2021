@@ -1,12 +1,9 @@
 package com.ieee.ieee_yesist.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.ieee.ieee_yesist.R;
 import com.ieee.ieee_yesist.model.AccomodationModel;
 import com.ieee.ieee_yesist.model.OnAccomodationClickListener;
-import com.ieee.ieee_yesist.model.OnPlaceClickListener;
 
 import java.util.ArrayList;
 
@@ -43,7 +39,7 @@ public class AccomodationAdapter extends RecyclerView.Adapter<AccomodationAdapte
     @Override
     public AccomodationAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.accomodation_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_accomodation,parent,false);
 
         return new Viewholder(view);
     }

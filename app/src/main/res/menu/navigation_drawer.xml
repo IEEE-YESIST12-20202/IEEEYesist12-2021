@@ -47,6 +47,12 @@
             android:title="About Us"
             android:enabled="true"
             android:icon="@drawable/ic_aboutus" />
+        <item
+            android:id="@+id/notificationFragment"
+            android:title="Notification History"
+            android:enabled="true"
+            android:icon="@drawable/ic_notifications_black_24dp"
+            />
     </group>
 
     <group

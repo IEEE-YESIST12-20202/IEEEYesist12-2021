@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -67,6 +68,8 @@ public class PlacesFragment extends Fragment implements OnPlaceClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
         db = FirebaseFirestore.getInstance();
         placeRV = binding.RVplaces;
@@ -143,9 +146,9 @@ public class PlacesFragment extends Fragment implements OnPlaceClickListener {
                             {
                                 placeModelArrayList.add(dc.getDocument().toObject(PlaceModel.class));
                             }
+                            if(dc.getType() ==  DocumentChange.Type.REMOVED)
+                                placeModelArrayList.remove(dc.getDocument().toObject(PlaceModel.class));
                             placeAdapter.notifyDataSetChanged();
-
-
                         }
                     }
                 });
