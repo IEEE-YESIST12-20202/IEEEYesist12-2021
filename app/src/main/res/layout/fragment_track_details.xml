@@ -59,7 +59,7 @@
                     android:layout_alignStart="@id/imageTrack"
                     android:layout_alignBottom="@id/imageTrack"
                     android:background="@drawable/track_bg"
-                    android:paddingTop="20dp"/>
+                    android:paddingTop="20dp" />
 
             </RelativeLayout>
 

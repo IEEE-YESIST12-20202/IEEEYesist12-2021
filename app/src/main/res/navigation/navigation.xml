@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.ieee.ieee_yesist.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+    <action
+        android:id="@+id/action_homeFragment_to_notificationFragment"
+        app:destination="@id/notificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tracksFragment"
         android:name="com.ieee.ieee_yesist.view.Tracks.TracksFragment"
@@ -97,4 +101,50 @@
         android:name="com.ieee.ieee_yesist.view.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/placesFragment"
+        android:name="com.ieee.ieee_yesist.view.PlacesFragment"
+        android:label="fragment_places"
+        tools:layout="@layout/fragment_places" >
+        <action
+            android:id="@+id/action_placesFragment_to_onePlaceFragment"
+            app:destination="@id/onePlaceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onePlaceFragment"
+        android:name="com.ieee.ieee_yesist.view.OnePlaceFragment"
+        android:label="OnePlaceFragment"
+        tools:layout="@layout/fragment_one_place">
+        <action
+            android:id="@+id/action_onePlaceFragment_to_placesFragment"
+            app:destination="@id/placesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finalPageFragment"
+        android:name="com.ieee.ieee_yesist.view.FinalPageFragment"
+        android:label="fragment_final_page"
+        tools:layout="@layout/fragment_final_page" >
+        <action
+            android:id="@+id/action_finalPageFragment_to_accomodationFragment"
+            app:destination="@id/accomodationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accomodationFragment"
+        android:name="com.ieee.ieee_yesist.view.AccomodationFragment"
+        android:label="fragment_accomodation"
+        tools:layout="@layout/fragment_accomodation" >
+        <action
+            android:id="@+id/action_accomodationFragment_to_finalPageFragment"
+            app:destination="@id/finalPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.ieee.ieee_yesist.view.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification">
+        <action
+            android:id="@+id/action_notificationFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
 </navigation>

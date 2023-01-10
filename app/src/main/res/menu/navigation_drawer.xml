@@ -32,10 +32,27 @@
             android:enabled="true"
             android:icon="@drawable/ic_sponsors" />
         <item
+            android:id="@+id/finalPageFragment"
+            android:title="Finale"
+            android:enabled="true"
+            android:icon="@drawable/ic_baseline_near_me_24"/>
+        <item
+            android:id="@+id/placesFragment"
+            android:title="Places to Visit"
+            android:enabled="true"
+            android:icon="@drawable/castle"
+            />
+        <item
             android:id="@+id/aboutUsFragment"
             android:title="About Us"
             android:enabled="true"
             android:icon="@drawable/ic_aboutus" />
+        <item
+            android:id="@+id/notificationFragment"
+            android:title="Notification History"
+            android:enabled="true"
+            android:icon="@drawable/ic_notifications_black_24dp"
+            />
     </group>
 
     <group

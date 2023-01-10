@@ -21,7 +21,7 @@
             android:id="@+id/mainhead_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="26dp"
             android:layout_marginTop="18dp"
             android:layout_marginBottom="48dp"
             android:fontFamily="@font/poppins_extra_bold"
@@ -30,7 +30,7 @@
             android:text="@string/ieee_yesist_12_text"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="40sp"
+            android:textSize="36sp"
             app:autoSizeMaxTextSize="46sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -43,19 +43,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/poppins_extra_bold"
             android:text="@string/year_text"
             android:textColor="@color/white"
-            android:textSize="26sp"
+            android:textSize="24sp"
             app:autoSizeMaxTextSize="30sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.17"
             app:layout_constraintStart_toEndOf="@+id/mainhead_header"
+
+
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.504" />
+
+            />
+
+        <ImageView
+            android:id="@+id/home_bell_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="26dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/ic_home_page_bell_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/mainhead_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mainhead_header"></ImageView>
 
         <ImageView
             android:id="@+id/profile"
@@ -106,6 +120,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/home_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
@@ -119,15 +134,16 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/callForPilots_header"
+                        android:id="@+id/card_header"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
+                        android:layout_marginHorizontal="8dp"
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/poppins_extra_bold"
                         android:includeFontPadding="false"
                         android:paddingBottom="1dp"
-                        android:text="@string/call_for_pilots_header"
+                        android:text="@string/call_for_abstracts_header"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="28sp"
@@ -135,7 +151,7 @@
                         app:autoSizeTextType="uniform" />
 
                     <TextView
-                        android:id="@+id/callForPilotsDescription"
+                        android:id="@+id/card_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
@@ -143,7 +159,7 @@
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/nunito_font"
                         android:maxLines="5"
-                        android:text="@string/call_for_pilots_description"
+                        android:text="@string/call_for_abstracts_description"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -155,14 +171,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/mainhead_header" />
 
                     <Button
-                        android:id="@+id/registerButton"
+                        android:id="@+id/card_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:text="@string/register_now_button_text"
+                        android:text="@string/submit_now_button_text"
                         app:cornerRadius="10dp"
                         app:strokeColor="@color/white"
-                        app:strokeWidth="3dp"></Button>
+                        app:strokeWidth="3dp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
