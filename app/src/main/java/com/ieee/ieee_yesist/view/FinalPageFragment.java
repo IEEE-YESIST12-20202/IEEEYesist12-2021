@@ -128,7 +128,7 @@ public class FinalPageFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
                 try {
-                    intent.setData(Uri.parse("https://www.easytourz.com/BT-EmabedTour/all/5d111f3d2f317eb1"));
+                    intent.setData(Uri.parse("http://360.aast.edu/abokir-e/"));
                     startActivity(intent);
                 } catch (ActivityNotFoundException exception) {
                     Toast.makeText(getContext(), "Error text", Toast.LENGTH_SHORT).show();
