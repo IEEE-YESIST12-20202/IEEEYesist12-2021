@@ -66,7 +66,6 @@ public class TracksFragment extends Fragment implements TrackListAdapter.OnTrack
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
-                        Log.d("Responsemeralauda", String.valueOf(jsonArray));
                         ArrayList<String> first = new ArrayList<>();
                         ArrayList<String> second = new ArrayList<>();
                         for(int i = 0; i < jsonArray.length(); i++) {
