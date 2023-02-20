@@ -92,6 +92,7 @@ public class TracksFragment extends Fragment implements TrackListAdapter.OnTrack
                             setTrackRecycler(trackList);
 
                     }
+
                 },
                 new Response.ErrorListener() {
                     @Override
