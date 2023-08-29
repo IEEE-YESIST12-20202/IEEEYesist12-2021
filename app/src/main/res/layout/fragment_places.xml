@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/poppins"
-                    android:text="Bengaluru"
+                    android:text="Alexandria, Egypt"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +101,7 @@
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/poppins_bold"
                 android:lines="1"
-                android:text="Bengaluru"
+                android:text="Alexandria"
                 android:textColor="@color/white"
                 android:textSize="23sp" />
 

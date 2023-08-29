@@ -12,6 +12,8 @@ import androidx.navigation.Navigation;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +62,7 @@ public class FinalPageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Code to show image in full screen:
-                new PhotoFullPopupWindow(getActivity(), R.layout.popup_photo_full, view, R.drawable.bangalore_map);
+                new PhotoFullPopupWindow(getActivity(), R.layout.popup_photo_full, view, R.drawable.map_egypt);
 
             }
         });
@@ -69,13 +71,14 @@ public class FinalPageFragment extends Fragment {
         binding.navigateToFinale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=Sri+Venkateshwara+College+of+Engineering+Vidyanagar,+Kempegowda+International+Airport+Road,+Bengaluru");
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=Arab+Academy+for+Science,+Technology+and+Maritime+Transport,+Alexandria,+Egypt");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
             }
         });
-
+        binding.byTaxiDes.setText(Html.fromHtml(getResources().getString(R.string.reachbytaxi)));
+        binding.byTaxiDes.setMovementMethod(LinkMovementMethod.getInstance());
         View.OnClickListener reachByTaxiOnClickListener = v -> {
             if(binding.byTaxiDes.getVisibility() == View.VISIBLE)
             {
@@ -90,7 +93,8 @@ public class FinalPageFragment extends Fragment {
                 binding.arrowDown.setImageResource(R.drawable.ic_arrow_up);
             }
         };
-
+        binding.publicTransportDescription.setText(Html.fromHtml(getResources().getString(R.string.byPublicMeans)));
+        binding.publicTransportDescription.setMovementMethod(LinkMovementMethod.getInstance());
         binding.reachByTaxiCardview.setOnClickListener(reachByTaxiOnClickListener);
         binding.arrowDown.setOnClickListener(reachByTaxiOnClickListener);
 

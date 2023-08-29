@@ -22,7 +22,7 @@
     <string name="our_mission_text">Our Mission</string>
     <string name="yesist_desc">A program under ASIST - Augmented Social Innovations through Science and Technology</string>
     <string name="ieee_yesist_12_text">IEEE YESIST12</string>
-    <string name="year_text">2022</string>
+    <string name="year_text">2023</string>
     <string name="second_card_text">Empower and encourage the engineering minds to work for the social cause through: \n- Organising Competitions for young engineering graduates, engineering students and school students in the themes aligned with the vision. \n- Recognising the engineering educators for their service to the society \n- Creating a strong network for mentors and mentees from industry and academia. \n- Encouraging Interdisciplinary work in creating solutions for social issues.</string>
     <string name="first_card_text">To instill social responsibility and ethics as a continuing education in the young minds through activities and encourage service oriented engineering practice.</string>
 
@@ -891,10 +891,34 @@ Stephen Okwiri</string>
     <string name="default_notification_channel_id">com.ieee.ieee_yesist.default</string>
     <string name="submit_now_button_text">Submit Now</string>
     <string name="call_for_abstracts_description">Abstract Submission Has Started Click the button below to submit your abstract</string>
-    <string name="VenueName">Sri Venkateshwara College of Engineering, Bangalore​</string>
-    <string name="venueAddress">Sri Venkateshwara College of Engineering Vidyanagar, Kempegowda International Airport Road, Bengaluru – 562 157.</string>
-    <string name="reachbytaxi">Catch a taxi from the nearest taxi stand across from the airport. Most taxis are medium-sized passenger vehicles but are charged the same as a general taxi. Taxi fares from the airport to the hotel are fixed, so confirm the fare prior to departure.</string>
-    <string name="byPublicMeans"><b>From Airport</b>\nGet on a Bus and Get off at the ‘Sri Venkateswara College of Engineering.\n \n<b>From Majestic Bus Terminal</b>\nGet on at the Majestic Bus Terminal (Bus: 282B and 282F) Get off at the Sri Venkateswara College of Engineering. \n \n<b>From East Railway station</b> \nGet on at the East Railway Station (Bus: 292D, 295D and 296D) Get off at the Sri Venkateswara College of Engineering</string>
-    <string name="telN0">+919731226262</string>
+    <string name="VenueName">Arab Academy for Science, Technology and Maritime Transport (AASTMT), Egypt</string>
+    <string name="venueAddress">Arab Academy for Science, Technology and Maritime Transport (AASTMT), Abou Kir, Alexandria - Egypt P.O. Box 1029</string>
+    <string name="reachbytaxi">
+        <![CDATA[
+    <b>From Cairo International Airport (CIA)</b><br>
+    <b>Take Uber Taxi</b><br>
+    Uber Taxi to AASTMT (50$)<br><br>
+
+    <b>From Borg El Arab Airport (HBE)</b><br>
+    <b>Option 1 - Take an Airport taxi</b><br>
+    Airport Taxi Service - <a href="https://www.alexandria-airport.com/taxi-service/">Click here</a><br>
+
+    <b>Option 2 - Take Uber Taxi</b><br>
+    Uber Taxi - Taxi fare from Borg Elarab Airport to Abu Kir can cost approximately (Uber Taxi $15 USD).
+    ]]>
+    </string>
+
+    <string name="telN0">(+203) 562-1785, (+203) 562-2366</string>
+    <string name="byPublicMeans"><![CDATA[
+<b>From Cairo International Airport (CIA)</b><br>
+<b>Take a bus</b><br>
+1- Terminal Shuttle bus (free) to Superjet Bus<br>
+2- Superjet bus to Smouha Alexandria (5$)<br>
+3- Uber from Smouha to AASTMT (3$)<br><br>
+
+<b>From Borg El Arab Airport (HBE)</b><br>
+<b>Take a bus</b><br>
+Shuttle Bus - <a href="https://cairoshuttlebus.com/?gclid=EAIaIQobChMI7v7WmITS_AIVAI5oCR00RgFCEAAYAyAAEgIdOPD_BwE">Click here</a>
+]]></string>
 
 </resources>

@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.ieee.ieee_yesist"
         minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 10
-        versionName "1.9"
+        targetSdkVersion 33
+        versionCode 16
+        versionName "2.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -52,7 +52,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:19.0.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "androidx.fragment:fragment:1.3.0"
     implementation "androidx.navigation:navigation-fragment:2.3.3"
